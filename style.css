@@ -215,13 +215,15 @@ body {
   margin: 0 auto;
 }
 
-  .tap-section {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: fadeInUp 1.5s ease-out 1s both;
-  }
+.tap-section {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: fadeInUp 1.5s ease-out 1s both;
+  z-index: 1002;
+  pointer-events: auto;
+}
 
 .tap-text {
   font-size: 1.2rem;
@@ -231,6 +233,11 @@ body {
   letter-spacing: 2px;
   animation: tapBounce 2s infinite;
   cursor: pointer;
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 @keyframes tapBounce {
@@ -275,11 +282,7 @@ body {
 }
 
 .menu-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 2rem;
-  flex-wrap: wrap;
 }
 
 .header-left {
@@ -301,19 +304,23 @@ body {
 
 .categories {
   display: flex;
-  gap: 1rem;
+  gap: 1.2rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .category {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 0.8rem;
+  text-align: center;
+  font-size: 1rem;
   color: var(--coffee);
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 1rem;
   border-radius: 8px;
   transition: all 0.3s ease;
+  min-width: 100px;
 }
 
 .category:hover {
@@ -326,21 +333,18 @@ body {
 }
 
 .category img {
-  width: 30px;
-  height: 30px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background-color: var(--matcha); 
-  padding: 8px;
+  padding: 12px;
   object-fit: contain;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.6rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
+  padding: 2rem 0;
   transition: all 0.5s ease;
 }
 
@@ -351,6 +355,9 @@ body {
   text-align: center;
   padding: 1rem;
   transition: opacity 0.5s ease, transform 0.5s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .image-frame {
@@ -362,6 +369,7 @@ body {
   overflow: hidden;
   border-radius: 12px;
   background-color: var(--matcha);
+  flex-grow: 1;
 }
 
 .image-frame img {
@@ -372,19 +380,23 @@ body {
 
 .product-card h3 {
   margin: 1rem 0 0.5rem;
+  font-size: 1.1rem;
 }
 
 .price {
   font-weight: bold;
   color: var(--coffee);
+  margin-bottom: 0.5rem;
 }
 
 .sizes {
   display: flex;
   justify-content: space-around;
-  margin-top: 1rem;
+  margin-top: auto;
   font-size: 0.8rem;
   color: #777;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .sizes span {
@@ -392,6 +404,7 @@ body {
   border-radius: 15px;
   cursor: pointer;
   border: 1px solid transparent;
+  white-space: nowrap;
 }
 
 .sizes span:hover {
@@ -400,26 +413,81 @@ body {
   border-color: var(--coffee);
 }
 
-/* Responsive Design for Mobile and Tablet */
+/* Enhanced Responsive Design */
+@media (max-width: 1200px) {
+  .hero-logo {
+    width: 500px;
+    height: 500px;
+  }
+  
+  .floating-image {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-logo {
+    width: 450px;
+    height: 450px;
+  }
+  
+  .header-logo {
+    width: 180px;
+    height: 90px;
+  }
+  
+  .categories {
+    gap: 1.2rem;
+  }
+  
+  .category {
+    font-size: 0.95rem;
+    min-width: 95px;
+    padding: 0.9rem;
+  }
+  
+  .category img {
+    width: 48px;
+    height: 48px;
+    padding: 11px;
+  }
+}
+
 @media (max-width: 768px) {
   .menu-header {
-    flex-direction: column;
-    text-align: center;
-    gap: 2rem;
+    padding: 1.5rem;
   }
   
   .header-left {
     justify-content: center;
-  }
-  
-  .categories {
-    justify-content: center;
-    flex-wrap: wrap;
+    margin-bottom: 1rem;
   }
   
   .header-logo {
     width: 150px;
     height: 75px;
+  }
+  
+  .categories {
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .category {
+    font-size: 0.9rem;
+    min-width: 100px;
+    padding: 0.8rem;
+    flex: 0 0 calc(25% - 0.75rem);
+    max-width: 120px;
+    text-align: center;
+  }
+  
+  .category img {
+    width: 45px;
+    height: 45px;
+    padding: 10px;
   }
   
   .restaurant-name {
@@ -428,17 +496,29 @@ body {
   }
   
   .hero-logo {
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
   }
   
   .floating-image {
     width: 60px;
     height: 60px;
   }
+  
+  .product-card h3 {
+    font-size: 1rem;
+  }
+  
+  .sizes {
+    font-size: 0.75rem;
+  }
+  
+  .sizes span {
+    padding: 0.25rem 0.6rem;
+  }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
   .menu-header {
     padding: 1rem;
   }
@@ -449,11 +529,18 @@ body {
   }
   
   .categories {
-    gap: 1.5rem;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   
   .category {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    min-width: 80px;
+    padding: 0.6rem;
+    flex: 0 0 calc(25% - 0.6rem);
+    max-width: 90px;
+    text-align: center;
   }
   
   .category img {
@@ -468,8 +555,8 @@ body {
   }
   
   .hero-logo {
-    width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
   }
   
   .floating-image {
@@ -478,16 +565,158 @@ body {
   }
   
   .loader-logo img {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .loader-text {
+    font-size: 1.2rem;
+  }
+  
+  .product-card {
+    padding: 0.8rem;
+  }
+  
+  .image-frame {
+    height: 280px;
+  }
+  
+  .product-card h3 {
+    font-size: 0.9rem;
+  }
+  
+  .sizes {
+    font-size: 0.7rem;
+  }
+  
+  .sizes span {
+    padding: 0.2rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-logo {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .floating-image {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .loader-logo img {
     width: 150px;
     height: 150px;
   }
   
   .loader-text {
-    font-size: 1.2rem;
+    font-size: 1rem;
+  }
+  
+  .tap-text {
+    font-size: 1rem;
+  }
+  
+  .image-frame {
+    height: 250px;
+  }
+  
+  .product-card h3 {
+    font-size: 0.85rem;
+  }
+  
+  .sizes {
+    font-size: 0.65rem;
+  }
+  
+  .sizes span {
+    padding: 0.15rem 0.4rem;
+  }
+  
+  .categories {
+    gap: 0.6rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .category {
+    font-size: 0.75rem;
+    min-width: 70px;
+    padding: 0.5rem;
+    flex: 0 0 calc(25% - 0.45rem);
+    max-width: 80px;
+    text-align: center;
+  }
+  
+  .category img {
+    width: 30px;
+    height: 30px;
+    padding: 6px;
   }
 }
 
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+/* Bootstrap overrides to maintain design */
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.col-xl-3, .col-lg-4, .col-md-6, .col-sm-12 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.g-4 {
+  --bs-gutter-x: 2rem;
+  --bs-gutter-y: 2rem;
+}
+
+/* Add padding to product cards for better spacing */
+.product-card {
+  margin: 0.5rem;
+  padding: 1.5rem;
+}
+
+/* Ensure proper spacing on mobile */
+@media (max-width: 576px) {
+  .g-4 {
+    --bs-gutter-x: 1rem;
+    --bs-gutter-y: 1rem;
+  }
+  
+  .product-card {
+    margin: 0.25rem;
+    padding: 1rem;
+  }
+}
+
+/* Add container padding for better overall spacing */
+.menu-section .container-fluid {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+  .menu-section .container-fluid {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .menu-section .container-fluid {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
 }

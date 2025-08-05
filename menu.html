@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sougha Menu</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 </head>
@@ -38,324 +40,396 @@
 
   <!-- Menu Section -->
   <section class="menu-section" id="menu">
+    <div class="container-fluid px-3 px-md-4 px-lg-5">
+      <!-- category -->
+      <div class="menu-header">
+        <div class="row align-items-center">
+          <div class="col-lg-3 col-md-4 col-sm-12 mb-3 mb-md-0">
+            <div class="header-left">
+              <img src="images/1-03.png" alt="Logo" class="header-logo">
+            </div>
+          </div>
 
-    <!-- category -->
-    <div class="menu-header">
-      <div class="header-left">
-        <img src="images/1-03.png" alt="Logo" class="header-logo">
-      </div>
-      <div class="categories">
-        <div class="category">
-          <img src="images/drink.png" alt="Drink Icon">
-          <span>Drinks</span>
-        </div>
-        <div class="category">
-          <img src="images/drink.png" alt="Drink Icon">
-          <span>Hot Coffee</span>
-        </div>
-        <div class="category">
-          <img src="images/drink.png" alt="Drink Icon">
-          <span>Hot Teas</span>
-        </div>
-        <div class="category">
-          <img src="images/drink.png" alt="Drink Icon">
-          <span>Bakery</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- product -->
-    <div class="product-grid">
-
-      <div class="product-card" data-category="drinks">
-        <div class="image-frame">
-          <img src="images/1.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Iced Shaken Espresso</h3>
-        <p class="price">$30.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="drinks">
-        <div class="image-frame">
-          <img src="images/2.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Iced Shaken Espresso</h3>
-        <p class="price">$30.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+          <div class="col-lg-9 col-md-8 col-sm-12">
+            <div class="categories">
+              <div class="category">
+                <img src="images/drink2.png" alt="Drink Icon">
+                <span>Cold Drinks</span>
+              </div>
+              <div class="category">
+                <img src="images/brade.png" alt="Drink Icon">
+                <span>Bread</span>
+              </div>
+              <div class="category">
+                <img src="images/hotdrink.png" alt="Drink Icon">
+                <span>Hot Coffee</span>
+              </div>
+              <div class="category">
+                <img src="images/sandwich.png" alt="Drink Icon">
+                <span>Sandwich</span>
+              </div>
+              <div class="category">
+                <img src="images/carwason.png" alt="Drink Icon">
+                <span>Carwashon</span>
+              </div>
+              <div class="category">
+                <img src="images/cake.png" alt="Drink Icon">
+                <span>Cake</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="product-card" data-category="drinks">
-        <div class="image-frame">
-          <img src="images/1.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Iced Shaken Espresso</h3>
-        <p class="price">$30.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
+      <!-- product -->
+      <div class="product-grid">
+        <div class="row g-4">
 
-      <div class="product-card" data-category="drinks">
-        <div class="image-frame">
-          <img src="images/2.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Iced Shaken Espresso</h3>
-        <p class="price">$30.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="drinks">
+              <div class="image-frame">
+                <img src="images/1.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Iced Shaken Espresso</h3>
+              <p class="price">$30.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
 
-      <div class="product-card" data-category="drinks">
-        <div class="image-frame">
-          <img src="images/1.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Iced Shaken Espresso</h3>
-        <p class="price">$30.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="drinks">
+              <div class="image-frame">
+                <img src="images/2.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Iced Shaken Espresso</h3>
+              <p class="price">$30.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
 
-      <div class="product-card" data-category="drinks">
-        <div class="image-frame">
-          <img src="images/2.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Iced Shaken Espresso</h3>
-        <p class="price">$30.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
-      
-      <div class="product-card" data-category="hot-coffee">
-        <div class="image-frame">
-          <img src="images/3.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Hot Coffee</h3>
-        <p class="price">$25.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="drinks">
+              <div class="image-frame">
+                <img src="images/1.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Iced Shaken Espresso</h3>
+              <p class="price">$30.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
 
-      <div class="product-card" data-category="hot-coffee">
-        <div class="image-frame">
-          <img src="images/4.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Hot Coffee</h3>
-        <p class="price">$25.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="drinks">
+              <div class="image-frame">
+                <img src="images/2.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Iced Shaken Espresso</h3>
+              <p class="price">$30.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
 
-      <div class="product-card" data-category="hot-coffee">
-        <div class="image-frame">
-          <img src="images/3.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Hot Coffee</h3>
-        <p class="price">$25.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="drinks">
+              <div class="image-frame">
+                <img src="images/1.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Iced Shaken Espresso</h3>
+              <p class="price">$30.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
 
-      <div class="product-card" data-category="hot-coffee">
-        <div class="image-frame">
-          <img src="images/4.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Hot Coffee</h3>
-        <p class="price">$25.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="drinks">
+              <div class="image-frame">
+                <img src="images/2.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Iced Shaken Espresso</h3>
+              <p class="price">$30.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="hot-coffee">
+              <div class="image-frame">
+                <img src="images/3.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Hot Coffee</h3>
+              <p class="price">$25.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
 
-      <div class="product-card" data-category="hot-coffee">
-        <div class="image-frame">
-          <img src="images/3.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Hot Coffee</h3>
-        <p class="price">$25.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="hot-coffee">
+              <div class="image-frame">
+                <img src="images/4.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Hot Coffee</h3>
+              <p class="price">$25.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
 
-      <div class="product-card" data-category="hot-coffee">
-        <div class="image-frame">
-          <img src="images/4.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Hot Coffee</h3>
-        <p class="price">$25.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="hot-coffee">
+              <div class="image-frame">
+                <img src="images/3.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Hot Coffee</h3>
+              <p class="price">$25.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
 
-      <div class="product-card" data-category="hot-coffee">
-        <div class="image-frame">
-          <img src="images/3.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Hot Coffee</h3>
-        <p class="price">$25.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="hot-coffee">
+              <div class="image-frame">
+                <img src="images/4.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Hot Coffee</h3>
+              <p class="price">$25.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
 
-      <div class="product-card" data-category="hot-coffee">
-        <div class="image-frame">
-          <img src="images/4.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Hot Coffee</h3>
-        <p class="price">$25.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
-      
-      <div class="product-card" data-category="hot-teas">
-        <div class="image-frame">
-          <img src="images/3.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Hot Tea</h3>
-        <p class="price">$20.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="hot-coffee">
+              <div class="image-frame">
+                <img src="images/3.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Hot Coffee</h3>
+              <p class="price">$25.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
 
-      <div class="product-card" data-category="hot-teas">
-        <div class="image-frame">
-          <img src="images/4.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Hot Tea</h3>
-        <p class="price">$20.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="hot-coffee">
+              <div class="image-frame">
+                <img src="images/4.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Hot Coffee</h3>
+              <p class="price">$25.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="hot-coffee">
+              <div class="image-frame">
+                <img src="images/3.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Hot Coffee</h3>
+              <p class="price">$25.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="hot-coffee">
+              <div class="image-frame">
+                <img src="images/4.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Hot Coffee</h3>
+              <p class="price">$25.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="hot-teas">
+              <div class="image-frame">
+                <img src="images/3.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Hot Tea</h3>
+              <p class="price">$20.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="hot-teas">
+              <div class="image-frame">
+                <img src="images/4.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Hot Tea</h3>
+              <p class="price">$20.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="hot-teas">
+              <div class="image-frame">
+                <img src="images/3.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Hot Tea</h3>
+              <p class="price">$20.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="hot-teas">
+              <div class="image-frame">
+                <img src="images/4.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Hot Tea</h3>
+              <p class="price">$20.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="hot-teas">
+              <div class="image-frame">
+                <img src="images/3.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Hot Tea</h3>
+              <p class="price">$20.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="hot-teas">
+              <div class="image-frame">
+                <img src="images/4.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Hot Tea</h3>
+              <p class="price">$20.00</p>
+              <div class="sizes">
+                <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="bakery">
+              <div class="image-frame">
+                <img src="images/3.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Croissant</h3>
+              <p class="price">$15.00</p>
+              <div class="sizes">
+                <span>Small</span><span>Medium</span><span>Large</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="bakery">
+              <div class="image-frame">
+                <img src="images/4.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Muffin</h3>
+              <p class="price">$12.00</p>
+              <div class="sizes">
+                <span>Small</span><span>Medium</span><span>Large</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="bakery">
+              <div class="image-frame">
+                <img src="images/3.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Croissant</h3>
+              <p class="price">$15.00</p>
+              <div class="sizes">
+                <span>Small</span><span>Medium</span><span>Large</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="bakery">
+              <div class="image-frame">
+                <img src="images/4.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Muffin</h3>
+              <p class="price">$12.00</p>
+              <div class="sizes">
+                <span>Small</span><span>Medium</span><span>Large</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="bakery">
+              <div class="image-frame">
+                <img src="images/3.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Croissant</h3>
+              <p class="price">$15.00</p>
+              <div class="sizes">
+                <span>Small</span><span>Medium</span><span>Large</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            <div class="product-card" data-category="bakery">
+              <div class="image-frame">
+                <img src="images/4.png" alt="Iced Shaken Espresso" />
+              </div>
+              <h3>Muffin</h3>
+              <p class="price">$12.00</p>
+              <div class="sizes">
+                <span>Small</span><span>Medium</span><span>Large</span><span>Custom</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-
-      <div class="product-card" data-category="hot-teas">
-        <div class="image-frame">
-          <img src="images/3.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Hot Tea</h3>
-        <p class="price">$20.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="hot-teas">
-        <div class="image-frame">
-          <img src="images/4.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Hot Tea</h3>
-        <p class="price">$20.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="hot-teas">
-        <div class="image-frame">
-          <img src="images/3.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Hot Tea</h3>
-        <p class="price">$20.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="hot-teas">
-        <div class="image-frame">
-          <img src="images/4.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Hot Tea</h3>
-        <p class="price">$20.00</p>
-        <div class="sizes">
-          <span>Tall</span><span>Grande</span><span>Venti</span><span>Custom</span>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="bakery">
-        <div class="image-frame">
-          <img src="images/3.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Croissant</h3>
-        <p class="price">$15.00</p>
-        <div class="sizes">
-          <span>Small</span><span>Medium</span><span>Large</span><span>Custom</span>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="bakery">
-        <div class="image-frame">
-          <img src="images/4.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Muffin</h3>
-        <p class="price">$12.00</p>
-        <div class="sizes">
-          <span>Small</span><span>Medium</span><span>Large</span><span>Custom</span>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="bakery">
-        <div class="image-frame">
-          <img src="images/3.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Croissant</h3>
-        <p class="price">$15.00</p>
-        <div class="sizes">
-          <span>Small</span><span>Medium</span><span>Large</span><span>Custom</span>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="bakery">
-        <div class="image-frame">
-          <img src="images/4.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Muffin</h3>
-        <p class="price">$12.00</p>
-        <div class="sizes">
-          <span>Small</span><span>Medium</span><span>Large</span><span>Custom</span>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="bakery">
-        <div class="image-frame">
-          <img src="images/3.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Croissant</h3>
-        <p class="price">$15.00</p>
-        <div class="sizes">
-          <span>Small</span><span>Medium</span><span>Large</span><span>Custom</span>
-        </div>
-      </div>
-
-      <div class="product-card" data-category="bakery">
-        <div class="image-frame">
-          <img src="images/4.png" alt="Iced Shaken Espresso" />
-        </div>
-        <h3>Muffin</h3>
-        <p class="price">$12.00</p>
-        <div class="sizes">
-          <span>Small</span><span>Medium</span><span>Large</span><span>Custom</span>
-        </div>
-      </div>
-
     </div>
   </section>
 
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
