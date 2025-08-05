@@ -336,15 +336,12 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 5rem;
+  gap: 2rem;
   padding: 2rem;
   transition: all 0.5s ease;
-  max-width: 1400px;
-  margin: 0 auto;
 }
 
 .product-card {
