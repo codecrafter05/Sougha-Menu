@@ -211,8 +211,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     cat.style.transform = 'scale(1)';
                 });
                 this.classList.add('active');
-                this.style.backgroundColor = 'var(--coffee)';
-                this.style.color = 'white';
                 this.style.transform = 'scale(1.1)';
             });
         });

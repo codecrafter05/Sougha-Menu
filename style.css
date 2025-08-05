@@ -3,6 +3,10 @@
   --creme: #f9f5f0;
   --cramil: #dabfa2;
   --matcha: #f9f5f0;
+  --coffee-dark: #3d2b1f;
+  --creme-light: #f5f1eb;
+  --matcha-green: #556b2f;
+  --cramil-rust: #b8860b;
 }
 
 body {
@@ -313,15 +317,12 @@ body {
 }
 
 .category:hover {
-  background-color: var(--cramil);
   transform: scale(1.05);
 }
 
 .category.active {
-  background-color: var(--coffee);
-  color: white;
+  color: var(--matcha-green);
   transform: scale(1.1);
-  box-shadow: 0 4px 15px rgba(94, 70, 54, 0.3);
 }
 
 .category img {
