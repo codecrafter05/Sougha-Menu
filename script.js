@@ -91,19 +91,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const randomImage = Math.floor(Math.random() * 4) + 1;
                 const newSrc = currentSrc.replace(/\d+\.png/, `${randomImage}.png`);
                 
-                // Smooth transition
-                imageFrame.style.opacity = '0';
-                imageFrame.style.transition = 'opacity 0.3s ease';
+                // Instant change without any effects
+                imageFrame.src = newSrc;
                 
-                setTimeout(() => {
-                    imageFrame.src = newSrc;
-                    imageFrame.style.opacity = '1';
-                }, 150);
-                
-                // Add visual feedback
+                // Instant visual feedback
                 this.style.backgroundColor = 'var(--coffee)';
                 this.style.color = 'white';
-                this.style.transition = 'all 0.3s ease';
                 
                 // Reset other buttons in same card
                 const otherButtons = productCard.querySelectorAll('.sizes span');
