@@ -1,14 +1,67 @@
-// Smooth scroll to menu section when tap is clicked
+// Loader and page animations
 document.addEventListener('DOMContentLoaded', function() {
-    const tapSection = document.querySelector('.tap-section');
+    const loader = document.getElementById('loader');
+    const heroSection = document.getElementById('hero-section');
     const menuSection = document.getElementById('menu');
+    let hasNavigated = false; // Track if user has navigated
+    
+    // Hide loader and show hero section after 3 seconds
+    setTimeout(() => {
+        loader.classList.add('hidden');
+        heroSection.classList.add('visible');
+        
+        // Remove loader from DOM after animation
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 800);
+    }, 3000);
+    
+    // Prevent scroll on hero section
+    function preventScroll(e) {
+        if (!hasNavigated) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+    }
+    
+    // Add scroll prevention
+    document.addEventListener('wheel', preventScroll, { passive: false });
+    document.addEventListener('touchmove', preventScroll, { passive: false });
+    document.addEventListener('keydown', function(e) {
+        if (!hasNavigated && (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ')) {
+            e.preventDefault();
+        }
+    });
+    
+    // Smooth scroll to menu section when tap is clicked
+    const tapSection = document.querySelector('.tap-section');
+    const tapText = document.querySelector('.tap-text');
     
     if (tapSection && menuSection) {
         tapSection.addEventListener('click', function() {
-            menuSection.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
+            hasNavigated = true;
+            
+            // Hide hero section with animation
+            heroSection.classList.add('hidden');
+            
+            // Remove scroll prevention
+            document.removeEventListener('wheel', preventScroll);
+            document.removeEventListener('touchmove', preventScroll);
+            
+            // Show menu section after hero animation
+            setTimeout(() => {
+                menuSection.classList.add('visible');
+                
+                // Remove hero section and logo from DOM after animation
+                setTimeout(() => {
+                    heroSection.style.display = 'none';
+                    const heroLogo = document.querySelector('.hero-logo');
+                    if (heroLogo) {
+                        heroLogo.style.display = 'none';
+                    }
+                }, 1000);
+            }, 500);
         });
         
         // Add hover effect
