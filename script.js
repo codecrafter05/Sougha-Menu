@@ -146,5 +146,75 @@ document.addEventListener('DOMContentLoaded', function() {
     // Setup size selection after menu is visible
     setTimeout(() => {
         setupSizeSelection();
+        setupCategoryFilter();
     }, 4000); // After loader and hero animations
+    
+    // Category filter functionality
+    function setupCategoryFilter() {
+        const categories = document.querySelectorAll('.category');
+        const productCards = document.querySelectorAll('.product-card');
+        
+        categories.forEach(category => {
+            category.addEventListener('click', function() {
+                const selectedCategory = this.querySelector('span').textContent.toLowerCase();
+                let categoryFilter = '';
+                
+                // Map category names to data attributes
+                switch(selectedCategory) {
+                    case 'drinks':
+                        categoryFilter = 'drinks';
+                        break;
+                    case 'hot coffee':
+                        categoryFilter = 'hot-coffee';
+                        break;
+                    case 'hot teas':
+                        categoryFilter = 'hot-teas';
+                        break;
+                    case 'bakery':
+                        categoryFilter = 'bakery';
+                        break;
+                    default:
+                        categoryFilter = 'all';
+                }
+                
+                // Filter products with smooth animation
+                productCards.forEach((card, index) => {
+                    if (categoryFilter === 'all' || card.dataset.category === categoryFilter) {
+                        card.style.display = 'block';
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        
+                        // Staggered animation for visible cards
+                        setTimeout(() => {
+                            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    } else {
+                        // Hide cards with fade out
+                        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(-10px)';
+                        
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+                
+                // Update active category with animation
+                categories.forEach(cat => {
+                    cat.classList.remove('active');
+                    cat.style.transition = 'all 0.3s ease';
+                    cat.style.backgroundColor = '';
+                    cat.style.color = '';
+                    cat.style.transform = 'scale(1)';
+                });
+                this.classList.add('active');
+                this.style.backgroundColor = 'var(--coffee)';
+                this.style.color = 'white';
+                this.style.transform = 'scale(1.1)';
+            });
+        });
+    }
 }); 
