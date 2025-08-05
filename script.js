@@ -76,6 +76,47 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Size selection functionality
+    function setupSizeSelection() {
+        const sizeButtons = document.querySelectorAll('.sizes span');
+        const productCards = document.querySelectorAll('.product-card');
+        
+        sizeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const productCard = this.closest('.product-card');
+                const imageFrame = productCard.querySelector('.image-frame img');
+                const currentSrc = imageFrame.src;
+                
+                // Get random image number (1-4)
+                const randomImage = Math.floor(Math.random() * 4) + 1;
+                const newSrc = currentSrc.replace(/\d+\.png/, `${randomImage}.png`);
+                
+                // Smooth transition
+                imageFrame.style.opacity = '0';
+                imageFrame.style.transition = 'opacity 0.3s ease';
+                
+                setTimeout(() => {
+                    imageFrame.src = newSrc;
+                    imageFrame.style.opacity = '1';
+                }, 150);
+                
+                // Add visual feedback
+                this.style.backgroundColor = 'var(--coffee)';
+                this.style.color = 'white';
+                this.style.transition = 'all 0.3s ease';
+                
+                // Reset other buttons in same card
+                const otherButtons = productCard.querySelectorAll('.sizes span');
+                otherButtons.forEach(btn => {
+                    if (btn !== this) {
+                        btn.style.backgroundColor = '';
+                        btn.style.color = '';
+                    }
+                });
+            });
+        });
+    }
+    
     // Add scroll reveal animation for menu items
     const observerOptions = {
         threshold: 0.1,
@@ -108,4 +149,9 @@ document.addEventListener('DOMContentLoaded', function() {
         category.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
         observer.observe(category);
     });
+    
+    // Setup size selection after menu is visible
+    setTimeout(() => {
+        setupSizeSelection();
+    }, 4000); // After loader and hero animations
 }); 

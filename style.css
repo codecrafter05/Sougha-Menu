@@ -368,6 +368,20 @@ body {
   color: #777;
 }
 
+.sizes span {
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.sizes span:hover {
+  background-color: var(--cramil);
+  color: var(--coffee);
+  border-color: var(--coffee);
+}
+
 /* Responsive Design for Mobile and Tablet */
 @media (max-width: 768px) {
   .menu-header {
