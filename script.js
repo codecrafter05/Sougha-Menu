@@ -14,6 +14,32 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             loader.style.display = 'none';
         }, 800);
+        
+        // Auto navigate to menu section after 1 second
+        setTimeout(() => {
+            hasNavigated = true;
+            
+            // Hide hero section with animation
+            heroSection.classList.add('hidden');
+            
+            // Remove scroll prevention
+            document.removeEventListener('wheel', preventScroll);
+            document.removeEventListener('touchmove', preventScroll);
+            
+            // Show menu section after hero animation
+            setTimeout(() => {
+                menuSection.classList.add('visible');
+                
+                // Remove hero section and logo from DOM after animation
+                setTimeout(() => {
+                    heroSection.style.display = 'none';
+                    const heroLogo = document.querySelector('.hero-logo');
+                    if (heroLogo) {
+                        heroLogo.style.display = 'none';
+                    }
+                }, 1000);
+            }, 500);
+        }, 1000); // 1 second delay
     }, 3000);
     
     // Prevent scroll on hero section
@@ -276,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Enhanced tap section interaction
+    // Optional: Keep tap section for manual navigation if needed
     if (tapSection) {
         // Mouse events
         tapSection.addEventListener('mouseenter', function() {
@@ -301,29 +327,31 @@ document.addEventListener('DOMContentLoaded', function() {
             e.stopPropagation();
             this.style.transform = 'translateX(-50%) scale(1)';
             
-            // Trigger the click event
-            hasNavigated = true;
-            
-            // Hide hero section with animation
-            heroSection.classList.add('hidden');
-            
-            // Remove scroll prevention
-            document.removeEventListener('wheel', preventScroll);
-            document.removeEventListener('touchmove', preventScroll);
-            
-            // Show menu section after hero animation
-            setTimeout(() => {
-                menuSection.classList.add('visible');
+            // Manual navigation (optional)
+            if (!hasNavigated) {
+                hasNavigated = true;
                 
-                // Remove hero section and logo from DOM after animation
+                // Hide hero section with animation
+                heroSection.classList.add('hidden');
+                
+                // Remove scroll prevention
+                document.removeEventListener('wheel', preventScroll);
+                document.removeEventListener('touchmove', preventScroll);
+                
+                // Show menu section after hero animation
                 setTimeout(() => {
-                    heroSection.style.display = 'none';
-                    const heroLogo = document.querySelector('.hero-logo');
-                    if (heroLogo) {
-                        heroLogo.style.display = 'none';
-                    }
-                }, 1000);
-            }, 500);
+                    menuSection.classList.add('visible');
+                    
+                    // Remove hero section and logo from DOM after animation
+                    setTimeout(() => {
+                        heroSection.style.display = 'none';
+                        const heroLogo = document.querySelector('.hero-logo');
+                        if (heroLogo) {
+                            heroLogo.style.display = 'none';
+                        }
+                    }, 1000);
+                }, 500);
+            }
         }, { passive: false });
         
         // Click event for desktop
@@ -331,28 +359,31 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             e.stopPropagation();
             
-            hasNavigated = true;
-            
-            // Hide hero section with animation
-            heroSection.classList.add('hidden');
-            
-            // Remove scroll prevention
-            document.removeEventListener('wheel', preventScroll);
-            document.removeEventListener('touchmove', preventScroll);
-            
-            // Show menu section after hero animation
-            setTimeout(() => {
-                menuSection.classList.add('visible');
+            // Manual navigation (optional)
+            if (!hasNavigated) {
+                hasNavigated = true;
                 
-                // Remove hero section and logo from DOM after animation
+                // Hide hero section with animation
+                heroSection.classList.add('hidden');
+                
+                // Remove scroll prevention
+                document.removeEventListener('wheel', preventScroll);
+                document.removeEventListener('touchmove', preventScroll);
+                
+                // Show menu section after hero animation
                 setTimeout(() => {
-                    heroSection.style.display = 'none';
-                    const heroLogo = document.querySelector('.hero-logo');
-                    if (heroLogo) {
-                        heroLogo.style.display = 'none';
-                    }
-                }, 1000);
-            }, 500);
+                    menuSection.classList.add('visible');
+                    
+                    // Remove hero section and logo from DOM after animation
+                    setTimeout(() => {
+                        heroSection.style.display = 'none';
+                        const heroLogo = document.querySelector('.hero-logo');
+                        if (heroLogo) {
+                            heroLogo.style.display = 'none';
+                        }
+                    }, 1000);
+                }, 500);
+            }
         });
     }
 }); 
