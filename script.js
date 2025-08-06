@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Size selection functionality
     function setupSizeSelection() {
         const sizeButtons = document.querySelectorAll('.sizes span');
-        const productCards = document.querySelectorAll('.product-card');
         
         sizeButtons.forEach(button => {
             button.addEventListener('click', function() {
@@ -49,16 +48,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 const imageFrame = productCard.querySelector('.image-frame img');
                 const currentSrc = imageFrame.src;
                 
-                // Get random image number (1-4)
-                const randomImage = Math.floor(Math.random() * 4) + 1;
+                // Get random image number (1-6) for more variety
+                const randomImage = Math.floor(Math.random() * 6) + 1;
                 const newSrc = currentSrc.replace(/\d+\.png/, `${randomImage}.png`);
                 
-                // Instant change without any effects
-                imageFrame.src = newSrc;
+                // Smooth image transition
+                imageFrame.style.transition = 'opacity 0.3s ease';
+                imageFrame.style.opacity = '0';
                 
-                // Instant visual feedback
+                setTimeout(() => {
+                    imageFrame.src = newSrc;
+                    imageFrame.style.opacity = '1';
+                }, 150);
+                
+                // Enhanced visual feedback
                 this.style.backgroundColor = 'var(--coffee)';
                 this.style.color = 'white';
+                this.style.transform = 'scale(1.1)';
+                this.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
                 
                 // Reset other buttons in same card
                 const otherButtons = productCard.querySelectorAll('.sizes span');
@@ -66,8 +73,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (btn !== this) {
                         btn.style.backgroundColor = '';
                         btn.style.color = '';
+                        btn.style.transform = 'scale(1)';
+                        btn.style.boxShadow = '';
                     }
                 });
+                
+                // Add subtle card animation
+                const productItem = productCard.closest('.product-item');
+                productItem.style.transform = 'translateY(-3px)';
+                setTimeout(() => {
+                    productItem.style.transform = 'translateY(0)';
+                }, 200);
             });
         });
     }
@@ -87,9 +103,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
     
-    // Observe all product cards with staggered animation
-    const productCards = document.querySelectorAll('.product-card');
-    productCards.forEach((card, index) => {
+    // Observe all product items with staggered animation
+    const productItems = document.querySelectorAll('.product-item');
+    productItems.forEach((item, index) => {
+        const card = item.querySelector('.product-card');
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
         card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
@@ -114,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Enhanced Category filter functionality
     function setupCategoryFilter() {
         const categories = document.querySelectorAll('.category');
-        const productCards = document.querySelectorAll('.product-card');
+        const productItems = document.querySelectorAll('.product-item');
         
         categories.forEach(category => {
             category.addEventListener('click', function() {
@@ -123,68 +140,88 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Map category names to data attributes
                 switch(selectedCategory) {
-                    case 'drinks':
+                    case 'cold drinks':
                         categoryFilter = 'drinks';
+                        break;
+                    case 'bread':
+                        categoryFilter = 'bakery';
                         break;
                     case 'hot coffee':
                         categoryFilter = 'hot-coffee';
                         break;
-                    case 'hot teas':
-                        categoryFilter = 'hot-teas';
+                    case 'sandwich':
+                        categoryFilter = 'sandwich';
                         break;
-                    case 'bakery':
-                        categoryFilter = 'bakery';
+                    case 'carwashon':
+                        categoryFilter = 'carwashon';
+                        break;
+                    case 'cake':
+                        categoryFilter = 'cake';
                         break;
                     default:
                         categoryFilter = 'all';
                 }
                 
                 // Filter products with smooth animation
-                let visibleCards = [];
-                productCards.forEach((card, index) => {
+                let visibleItems = [];
+                productItems.forEach((item, index) => {
+                    const card = item.querySelector('.product-card');
                     if (categoryFilter === 'all' || card.dataset.category === categoryFilter) {
-                        card.style.display = 'block';
+                        item.style.display = 'block';
                         card.style.opacity = '0';
-                        card.style.transform = 'translateY(20px)';
-                        visibleCards.push({ card, index });
+                        card.style.transform = 'translateY(30px) scale(0.95)';
+                        visibleItems.push({ item, card, index });
                         
-                        // Staggered animation for visible cards
+                        // Staggered animation for visible items
                         setTimeout(() => {
-                            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                             card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, index * 100);
+                            card.style.transform = 'translateY(0) scale(1)';
+                        }, index * 80);
                     } else {
-                        // Hide cards with fade out
-                        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        // Hide items with fade out
+                        card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
                         card.style.opacity = '0';
-                        card.style.transform = 'translateY(-10px)';
+                        card.style.transform = 'translateY(-20px) scale(0.9)';
                         
                         setTimeout(() => {
-                            card.style.display = 'none';
-                        }, 300);
+                            item.style.display = 'none';
+                        }, 400);
                     }
                 });
                 
                 // Update active category with animation
                 categories.forEach(cat => {
                     cat.classList.remove('active');
-                    cat.style.transition = 'all 0.3s ease';
+                    cat.style.transition = 'all 0.4s ease';
                     cat.style.backgroundColor = '';
                     cat.style.color = '';
                     cat.style.transform = 'scale(1)';
                 });
                 this.classList.add('active');
                 this.style.transform = 'scale(1.1)';
+                
+                // Add subtle scroll to show filtered products
+                if (visibleCards.length > 0) {
+                    setTimeout(() => {
+                        const firstVisibleCard = visibleCards[0].card;
+                        firstVisibleCard.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start',
+                            inline: 'nearest'
+                        });
+                    }, 800);
+                }
             });
         });
     }
     
     // Add responsive touch support for mobile devices
     function setupTouchSupport() {
-        const productCards = document.querySelectorAll('.product-card');
+        const productItems = document.querySelectorAll('.product-item');
         
-        productCards.forEach(card => {
+        productItems.forEach(item => {
+            const card = item.querySelector('.product-card');
             let touchStartY = 0;
             let touchEndY = 0;
             
@@ -198,9 +235,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // If swipe up, add a subtle animation
                 if (touchDiff > 50) {
-                    this.style.transform = 'translateY(-5px)';
+                    item.style.transform = 'translateY(-5px)';
                     setTimeout(() => {
-                        this.style.transform = 'translateY(0)';
+                        item.style.transform = 'translateY(0)';
                     }, 200);
                 }
             }, { passive: true });
@@ -215,9 +252,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add window resize handler for better responsive behavior
     function handleResize() {
         const isMobile = window.innerWidth <= 768;
-        const productCards = document.querySelectorAll('.product-card');
+        const productItems = document.querySelectorAll('.product-item');
         
-        productCards.forEach(card => {
+        productItems.forEach(item => {
+            const card = item.querySelector('.product-card');
             if (isMobile) {
                 card.style.minHeight = 'auto';
             } else {
