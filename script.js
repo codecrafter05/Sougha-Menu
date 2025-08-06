@@ -64,56 +64,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const tapSection = document.querySelector('.tap-section');
     const tapText = document.querySelector('.tap-text');
     
-    // Size selection functionality
-    function setupSizeSelection() {
-        const sizeButtons = document.querySelectorAll('.sizes span');
-        
-        sizeButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const productCard = this.closest('.product-card');
-                const imageFrame = productCard.querySelector('.image-frame img');
-                const currentSrc = imageFrame.src;
-                
-                // Get random image number (1-6) for more variety
-                const randomImage = Math.floor(Math.random() * 6) + 1;
-                const newSrc = currentSrc.replace(/\d+\.png/, `${randomImage}.png`);
-                
-                // Smooth image transition
-                imageFrame.style.transition = 'opacity 0.3s ease';
-                imageFrame.style.opacity = '0';
-                
-                setTimeout(() => {
-                    imageFrame.src = newSrc;
-                    imageFrame.style.opacity = '1';
-                }, 150);
-                
-                // Enhanced visual feedback
-                this.style.backgroundColor = 'var(--coffee)';
-                this.style.color = 'white';
-                this.style.transform = 'scale(1.1)';
-                this.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
-                
-                // Reset other buttons in same card
-                const otherButtons = productCard.querySelectorAll('.sizes span');
-                otherButtons.forEach(btn => {
-                    if (btn !== this) {
-                        btn.style.backgroundColor = '';
-                        btn.style.color = '';
-                        btn.style.transform = 'scale(1)';
-                        btn.style.boxShadow = '';
-                    }
-                });
-                
-                // Add subtle card animation
-                const productItem = productCard.closest('.product-item');
-                productItem.style.transform = 'translateY(-3px)';
-                setTimeout(() => {
-                    productItem.style.transform = 'translateY(0)';
-                }, 200);
-            });
-        });
-    }
-    
     // Add scroll reveal animation for menu items with improved performance
     const observerOptions = {
         threshold: 0.1,
@@ -148,9 +98,8 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(category);
     });
     
-    // Setup size selection after menu is visible
+    // Setup category filter after menu is visible
     setTimeout(() => {
-        setupSizeSelection();
         setupCategoryFilter();
     }, 4000); // After loader and hero animations
     
@@ -166,23 +115,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Map category names to data attributes
                 switch(selectedCategory) {
-                    case 'cold drinks':
-                        categoryFilter = 'drinks';
-                        break;
-                    case 'bread':
-                        categoryFilter = 'bakery';
-                        break;
                     case 'hot coffee':
                         categoryFilter = 'hot-coffee';
                         break;
-                    case 'sandwich':
-                        categoryFilter = 'sandwich';
+                    case 'non-coffee':
+                        categoryFilter = 'non-coffee';
                         break;
-                    case 'carwashon':
-                        categoryFilter = 'carwashon';
+                    case 'iced coffee':
+                        categoryFilter = 'iced-coffee';
                         break;
-                    case 'cake':
-                        categoryFilter = 'cake';
+                    case 'non-coffee iced':
+                        categoryFilter = 'non-coffee-iced';
+                        break;
+                    case 'refresher drinks':
+                        categoryFilter = 'refresher';
+                        break;
+                    case 'ice cream':
+                        categoryFilter = 'ice-cream';
                         break;
                     default:
                         categoryFilter = 'all';
@@ -228,9 +177,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.style.transform = 'scale(1.1)';
                 
                 // Add subtle scroll to show filtered products
-                if (visibleCards.length > 0) {
+                if (visibleItems.length > 0) {
                     setTimeout(() => {
-                        const firstVisibleCard = visibleCards[0].card;
+                        const firstVisibleCard = visibleItems[0].card;
                         firstVisibleCard.scrollIntoView({ 
                             behavior: 'smooth', 
                             block: 'start',
