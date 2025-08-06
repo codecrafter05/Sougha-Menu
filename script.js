@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const card = item.querySelector('.product-card');
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
-        card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        card.style.transition = `opacity 0.3s ease ${index * 0.05}s, transform 0.3s ease ${index * 0.05}s`;
         observer.observe(card);
     });
     
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
     categories.forEach((category, index) => {
         category.style.opacity = '0';
         category.style.transform = 'translateY(20px)';
-        category.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+        category.style.transition = `opacity 0.3s ease ${index * 0.05}s, transform 0.3s ease ${index * 0.05}s`;
         observer.observe(category);
     });
     
@@ -149,26 +149,26 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         // Staggered animation for visible items
                         setTimeout(() => {
-                            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                             card.style.opacity = '1';
                             card.style.transform = 'translateY(0) scale(1)';
-                        }, index * 80);
+                        }, index * 40);
                     } else {
                         // Hide items with fade out
-                        card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                        card.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
                         card.style.opacity = '0';
                         card.style.transform = 'translateY(-20px) scale(0.9)';
                         
                         setTimeout(() => {
                             item.style.display = 'none';
-                        }, 400);
+                        }, 200);
                     }
                 });
                 
                 // Update active category with animation
                 categories.forEach(cat => {
                     cat.classList.remove('active');
-                    cat.style.transition = 'all 0.4s ease';
+                    cat.style.transition = 'all 0.2s ease';
                     cat.style.backgroundColor = '';
                     cat.style.color = '';
                     cat.style.transform = 'scale(1)';
@@ -176,17 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.classList.add('active');
                 this.style.transform = 'scale(1.1)';
                 
-                // Add subtle scroll to show filtered products
-                if (visibleItems.length > 0) {
-                    setTimeout(() => {
-                        const firstVisibleCard = visibleItems[0].card;
-                        firstVisibleCard.scrollIntoView({ 
-                            behavior: 'smooth', 
-                            block: 'start',
-                            inline: 'nearest'
-                        });
-                    }, 800);
-                }
+
             });
         });
     }
