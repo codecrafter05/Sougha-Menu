@@ -1,328 +1,243 @@
-// Loader and page animations
+// Loader and page animations + dynamic menu building
 document.addEventListener('DOMContentLoaded', function() {
-    const loader = document.getElementById('loader');
-    const heroSection = document.getElementById('hero-section');
-    const menuSection = document.getElementById('menu');
-    let hasNavigated = false; // Track if user has navigated
-    
-    // Hide loader and show hero section after 3 seconds
-    setTimeout(() => {
-        loader.classList.add('hidden');
-        heroSection.classList.add('visible');
-        
-        // Remove loader from DOM after animation
-        setTimeout(() => {
-            loader.style.display = 'none';
-        }, 800);
-        
-        // Auto navigate to menu section after 1 second
-        setTimeout(() => {
-            hasNavigated = true;
-            
-            // Hide hero section with animation
-            heroSection.classList.add('hidden');
-            
-            // Remove scroll prevention
-            document.removeEventListener('wheel', preventScroll);
-            document.removeEventListener('touchmove', preventScroll);
-            
-            // Show menu section after hero animation
-            setTimeout(() => {
-                menuSection.classList.add('visible');
-                
-                // Remove hero section and logo from DOM after animation
-                setTimeout(() => {
-                    heroSection.style.display = 'none';
-                    const heroLogo = document.querySelector('.hero-logo');
-                    if (heroLogo) {
-                        heroLogo.style.display = 'none';
-                    }
-                }, 1000);
-            }, 500);
-        }, 1000); // 1 second delay
-    }, 3000);
-    
-    // Prevent scroll on hero section
-    function preventScroll(e) {
-        if (!hasNavigated) {
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
-        }
-    }
-    
-    // Add scroll prevention
-    document.addEventListener('wheel', preventScroll, { passive: false });
-    document.addEventListener('touchmove', preventScroll, { passive: false });
-    document.addEventListener('keydown', function(e) {
-        if (!hasNavigated && (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ')) {
-            e.preventDefault();
-        }
-    });
-    
-    // Smooth scroll to menu section when tap is clicked
-    const tapSection = document.querySelector('.tap-section');
-    const tapText = document.querySelector('.tap-text');
-    
-    // Add scroll reveal animation for menu items with improved performance
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Observe all product items with staggered animation
-    const productItems = document.querySelectorAll('.product-item');
-    productItems.forEach((item, index) => {
-        const card = item.querySelector('.product-card');
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = `opacity 0.3s ease ${index * 0.05}s, transform 0.3s ease ${index * 0.05}s`;
-        observer.observe(card);
-    });
-    
-    // Observe categories with improved animation
-    const categories = document.querySelectorAll('.category');
-    categories.forEach((category, index) => {
-        category.style.opacity = '0';
-        category.style.transform = 'translateY(20px)';
-        category.style.transition = `opacity 0.3s ease ${index * 0.05}s, transform 0.3s ease ${index * 0.05}s`;
-        observer.observe(category);
-    });
-    
-    // Setup category filter after menu is visible
-    setTimeout(() => {
-        setupCategoryFilter();
-    }, 4000); // After loader and hero animations
-    
-    // Enhanced Category filter functionality
-    function setupCategoryFilter() {
-        const categories = document.querySelectorAll('.category');
-        const productItems = document.querySelectorAll('.product-item');
-        
-        categories.forEach(category => {
-            category.addEventListener('click', function() {
-                const selectedCategory = this.querySelector('span').textContent.toLowerCase();
-                let categoryFilter = '';
-                
-                // Map category names to data attributes
-                switch(selectedCategory) {
-                    case 'hot coffee':
-                        categoryFilter = 'hot-coffee';
-                        break;
-                    case 'non-coffee':
-                        categoryFilter = 'non-coffee';
-                        break;
-                    case 'iced coffee':
-                        categoryFilter = 'iced-coffee';
-                        break;
-                    case 'non-coffee iced':
-                        categoryFilter = 'non-coffee-iced';
-                        break;
-                    case 'refresher drinks':
-                        categoryFilter = 'refresher';
-                        break;
-                    case 'ice cream':
-                        categoryFilter = 'ice-cream';
-                        break;
-                    default:
-                        categoryFilter = 'all';
-                }
-                
-                // Filter products with smooth animation
-                let visibleItems = [];
-                productItems.forEach((item, index) => {
-                    const card = item.querySelector('.product-card');
-                    if (categoryFilter === 'all' || card.dataset.category === categoryFilter) {
-                        item.style.display = 'block';
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(30px) scale(0.95)';
-                        visibleItems.push({ item, card, index });
-                        
-                        // Staggered animation for visible items
-                        setTimeout(() => {
-                            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0) scale(1)';
-                        }, index * 40);
-                    } else {
-                        // Hide items with fade out
-                        card.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(-20px) scale(0.9)';
-                        
-                        setTimeout(() => {
-                            item.style.display = 'none';
-                        }, 200);
-                    }
-                });
-                
-                // Update active category with animation
-                categories.forEach(cat => {
-                    cat.classList.remove('active');
-                    cat.style.transition = 'all 0.2s ease';
-                    cat.style.backgroundColor = '';
-                    cat.style.color = '';
-                    cat.style.transform = 'scale(1)';
-                });
-                this.classList.add('active');
-                this.style.transform = 'scale(1.1)';
-                
+  const loader = document.getElementById('loader');
+  const heroSection = document.getElementById('hero-section');
+  const menuSection = document.getElementById('menu');
+  const categoriesNav = document.getElementById('categories');
+  const productGrid = document.getElementById('product-grid');
+  let hasNavigated = false;
 
-            });
-        });
+  // i18n/dir support (prepared)
+  function setLanguage(lang) {
+    const isArabic = lang === 'ar';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
+  }
+  setLanguage('en');
+
+  // Price formatter (BHD default)
+  const formatPrice = (value, currency = 'BHD', locale = 'en-BH') =>
+    new Intl.NumberFormat(locale, { style: 'currency', currency, minimumFractionDigits: 2 }).format(value);
+
+  // Build categories
+  function renderCategories(categories) {
+    categoriesNav.innerHTML = '';
+    categoriesNav.setAttribute('role', 'tablist');
+    const fragment = document.createDocumentFragment();
+
+    categories.forEach((cat, index) => {
+      const button = document.createElement('button');
+      button.className = 'category';
+      button.type = 'button';
+      button.dataset.category = cat.slug;
+      button.setAttribute('role', 'tab');
+      button.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+      button.tabIndex = index === 0 ? 0 : -1;
+
+      const img = document.createElement('img');
+      img.src = cat.icon;
+      img.alt = `${cat.label.en} Icon`;
+      img.width = 55; img.height = 55; img.loading = 'lazy'; img.decoding = 'async';
+      const span = document.createElement('span');
+      span.textContent = cat.label.en;
+
+      button.appendChild(img);
+      button.appendChild(span);
+      fragment.appendChild(button);
+    });
+    categoriesNav.appendChild(fragment);
+  }
+
+  // Build products
+  function renderProducts(products) {
+    productGrid.innerHTML = '';
+    const fragment = document.createDocumentFragment();
+    products.forEach((p) => {
+      const item = document.createElement('div');
+      item.className = 'product-item';
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.dataset.category = p.category;
+      const frame = document.createElement('div');
+      frame.className = 'image-frame';
+      const img = document.createElement('img');
+      img.src = p.image;
+      img.alt = p.name.en;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.width = 400; img.height = 280;
+      frame.appendChild(img);
+      const title = document.createElement('h3');
+      title.textContent = p.name.en;
+      const price = document.createElement('p');
+      price.className = 'price';
+      price.textContent = formatPrice(p.price, p.currency || 'BHD');
+
+      card.appendChild(frame);
+      card.appendChild(title);
+      card.appendChild(price);
+      item.appendChild(card);
+      fragment.appendChild(item);
+    });
+    productGrid.appendChild(fragment);
+  }
+
+  // Filtering using data-category
+  function setupFiltering() {
+    const categoryButtons = categoriesNav.querySelectorAll('.category[role="tab"]');
+    const items = productGrid.querySelectorAll('.product-item');
+
+    function applyFilter(slug) {
+      categoryButtons.forEach(btn => {
+        const isActive = btn.dataset.category === slug;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        btn.tabIndex = isActive ? 0 : -1;
+      });
+      items.forEach((item, index) => {
+        const card = item.querySelector('.product-card');
+        const show = slug === 'all' || card.dataset.category === slug;
+        if (show) {
+          item.style.display = 'block';
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(30px) scale(0.95)';
+          setTimeout(() => {
+            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0) scale(1)';
+          }, index * 30);
+        } else {
+          card.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(-20px) scale(0.9)';
+          setTimeout(() => { item.style.display = 'none'; }, 180);
+        }
+      });
     }
-    
-    // Add responsive touch support for mobile devices
-    function setupTouchSupport() {
-        const productItems = document.querySelectorAll('.product-item');
-        
-        productItems.forEach(item => {
-            const card = item.querySelector('.product-card');
-            let touchStartY = 0;
-            let touchEndY = 0;
-            
-            card.addEventListener('touchstart', function(e) {
-                touchStartY = e.touches[0].clientY;
-            }, { passive: true });
-            
-            card.addEventListener('touchend', function(e) {
-                touchEndY = e.changedTouches[0].clientY;
-                const touchDiff = touchStartY - touchEndY;
-                
-                // If swipe up, add a subtle animation
-                if (touchDiff > 50) {
-                    item.style.transform = 'translateY(-5px)';
-                    setTimeout(() => {
-                        item.style.transform = 'translateY(0)';
-                    }, 200);
-                }
-            }, { passive: true });
-        });
+
+    // Click/keyboard handlers
+    categoryButtons.forEach((btn, idx) => {
+      btn.addEventListener('click', () => applyFilter(btn.dataset.category));
+      btn.addEventListener('keydown', (e) => {
+        const isRtl = document.documentElement.dir === 'rtl';
+        let newIndex = idx;
+        if (e.key === 'ArrowRight') {
+          newIndex = isRtl ? idx - 1 : idx + 1;
+        } else if (e.key === 'ArrowLeft') {
+          newIndex = isRtl ? idx + 1 : idx - 1;
+        } else if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          applyFilter(btn.dataset.category);
+          return;
+        } else {
+          return;
+        }
+        e.preventDefault();
+        if (newIndex < 0) newIndex = categoryButtons.length - 1;
+        if (newIndex >= categoryButtons.length) newIndex = 0;
+        categoryButtons[newIndex].focus();
+      });
+    });
+
+    // Activate first category by default
+    const first = categoryButtons[0];
+    if (first) applyFilter(first.dataset.category);
+  }
+
+  // Reveal animations observer
+  function setupRevealAnimations() {
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+    document.querySelectorAll('.product-card').forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = `opacity 0.3s ease ${index * 0.05}s, transform 0.3s ease ${index * 0.05}s`;
+      observer.observe(card);
+    });
+    categoriesNav.querySelectorAll('.category').forEach((cat, index) => {
+      cat.style.opacity = '0';
+      cat.style.transform = 'translateY(20px)';
+      cat.style.transition = `opacity 0.3s ease ${index * 0.05}s, transform 0.3s ease ${index * 0.05}s`;
+      observer.observe(cat);
+    });
+  }
+
+  // Load data and render
+  async function initMenu() {
+    try {
+      const res = await fetch('data/menu.json', { cache: 'no-cache' });
+      const data = await res.json();
+      // Build UI
+      const categories = [{ slug: 'all', label: { en: 'All', ar: 'الكل' }, icon: 'images/elments.png' }, ...data.categories];
+      renderCategories(categories);
+      renderProducts(data.products);
+      setupRevealAnimations();
+      setupFiltering();
+    } catch (e) {
+      console.error('Failed to load menu data', e);
     }
-    
-    // Setup touch support after menu is visible
+  }
+
+  // Keep original loader/hero/menu transition timing
+  setTimeout(() => {
+    loader.classList.add('hidden');
+    heroSection.classList.add('visible');
+    setTimeout(() => { loader.style.display = 'none'; }, 800);
     setTimeout(() => {
-        setupTouchSupport();
-    }, 4000);
-    
-    // Add window resize handler for better responsive behavior
-    function handleResize() {
-        const isMobile = window.innerWidth <= 768;
-        const productItems = document.querySelectorAll('.product-item');
-        
-        productItems.forEach(item => {
-            const card = item.querySelector('.product-card');
-            if (isMobile) {
-                card.style.minHeight = 'auto';
-            } else {
-                card.style.minHeight = '450px';
-            }
-        });
+      hasNavigated = true;
+      heroSection.classList.add('hidden');
+      setTimeout(() => {
+        menuSection.classList.add('visible');
+        setTimeout(() => {
+          heroSection.style.display = 'none';
+          const heroLogo = document.querySelector('.hero-logo');
+          if (heroLogo) heroLogo.style.display = 'none';
+        }, 1000);
+      }, 500);
+    }, 1000);
+  }, 3000);
+
+  // Prevent scroll until navigate (kept as before)
+  function preventScroll(e) {
+    if (!hasNavigated) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
     }
-    
-    // Call on load and resize
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    
-    // Add smooth scrolling for better UX
-    function smoothScrollTo(element) {
-        element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
+  }
+  document.addEventListener('wheel', preventScroll, { passive: false });
+  document.addEventListener('touchmove', preventScroll, { passive: false });
+  document.addEventListener('keydown', function(e) {
+    if (!hasNavigated && (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ')) {
+      e.preventDefault();
     }
-    
-    // Optional: Keep tap section for manual navigation if needed
-    if (tapSection) {
-        // Mouse events
-        tapSection.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateX(-50%) scale(1.05)';
-            this.style.transition = 'transform 0.3s ease';
-        });
-        
-        tapSection.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateX(-50%) scale(1)';
-        });
-        
-        // Touch events for mobile
-        tapSection.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            this.style.transform = 'translateX(-50%) scale(0.95)';
-            this.style.transition = 'transform 0.2s ease';
-        }, { passive: false });
-        
-        tapSection.addEventListener('touchend', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            this.style.transform = 'translateX(-50%) scale(1)';
-            
-            // Manual navigation (optional)
-            if (!hasNavigated) {
-                hasNavigated = true;
-                
-                // Hide hero section with animation
-                heroSection.classList.add('hidden');
-                
-                // Remove scroll prevention
-                document.removeEventListener('wheel', preventScroll);
-                document.removeEventListener('touchmove', preventScroll);
-                
-                // Show menu section after hero animation
-                setTimeout(() => {
-                    menuSection.classList.add('visible');
-                    
-                    // Remove hero section and logo from DOM after animation
-                    setTimeout(() => {
-                        heroSection.style.display = 'none';
-                        const heroLogo = document.querySelector('.hero-logo');
-                        if (heroLogo) {
-                            heroLogo.style.display = 'none';
-                        }
-                    }, 1000);
-                }, 500);
-            }
-        }, { passive: false });
-        
-        // Click event for desktop
-        tapSection.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // Manual navigation (optional)
-            if (!hasNavigated) {
-                hasNavigated = true;
-                
-                // Hide hero section with animation
-                heroSection.classList.add('hidden');
-                
-                // Remove scroll prevention
-                document.removeEventListener('wheel', preventScroll);
-                document.removeEventListener('touchmove', preventScroll);
-                
-                // Show menu section after hero animation
-                setTimeout(() => {
-                    menuSection.classList.add('visible');
-                    
-                    // Remove hero section and logo from DOM after animation
-                    setTimeout(() => {
-                        heroSection.style.display = 'none';
-                        const heroLogo = document.querySelector('.hero-logo');
-                        if (heroLogo) {
-                            heroLogo.style.display = 'none';
-                        }
-                    }, 1000);
-                }, 500);
-            }
-        });
-    }
-}); 
+  });
+
+  // Touch micro-interaction
+  function setupTouchSupport() {
+    document.querySelectorAll('.product-item').forEach(item => {
+      const card = item.querySelector('.product-card');
+      let touchStartY = 0;
+      card.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
+      card.addEventListener('touchend', (e) => {
+        const touchEndY = e.changedTouches[0].clientY;
+        if (touchStartY - touchEndY > 50) {
+          item.style.transform = 'translateY(-5px)';
+          setTimeout(() => { item.style.transform = 'translateY(0)'; }, 200);
+        }
+      }, { passive: true });
+    });
+  }
+
+  // Initialize data-driven menu early
+  initMenu().then(() => {
+    setTimeout(() => { setupTouchSupport(); }, 4000);
+  });
+});
