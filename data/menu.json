@@ -1,48 +1,104 @@
 {
   "categories": [
-    { "slug": "hot-coffee", "label": { "en": "Hot Coffee", "ar": "قهوة ساخنة" }, "icon": "images/hotdrink.png" },
-    { "slug": "non-coffee", "label": { "en": "Non-Coffee", "ar": "مشروبات بلا قهوة" }, "icon": "images/drink.png" },
-    { "slug": "iced-coffee", "label": { "en": "Iced Coffee", "ar": "قهوة باردة" }, "icon": "images/iced-shssaken.jpg" },
-    { "slug": "non-coffee-iced", "label": { "en": "Non-Coffee Iced", "ar": "مشروبات باردة بلا قهوة" }, "icon": "images/drink2.png" },
-    { "slug": "refresher", "label": { "en": "Refresher Drinks", "ar": "منعشات" }, "icon": "images/2.png" },
-    { "slug": "ice-cream", "label": { "en": "Ice Cream", "ar": "آيس كريم" }, "icon": "images/cake.png" }
+    {
+      "slug": "hot-beverages",
+      "label": { "en": "Hot Beverages", "ar": "مشروبات حارة" },
+      "icon": "images/hotdrink.png",
+      "subcategories": [
+        { "slug": "hot-coffee", "label": { "en": "Coffee", "ar": "القهوة الحارة" } },
+        { "slug": "tea", "label": { "en": "Tea", "ar": "الشاي" } },
+        { "slug": "karak", "label": { "en": "Karak", "ar": "الكرك" } }
+      ]
+    },
+    {
+      "slug": "cakes",
+      "label": { "en": "Cakes", "ar": "كيك" },
+      "icon": "images/cake.png",
+      "subcategories": [
+        { "slug": "arabic-cake", "label": { "en": "Arabic Cake", "ar": "كيك عربي" } },
+        { "slug": "italian-cake", "label": { "en": "Italian Cake", "ar": "كيك إيطالي" } },
+        { "slug": "popular-cake", "label": { "en": "Popular Cake", "ar": "كيك شعبي" } }
+      ]
+    },
+    {
+      "slug": "cold-beverages",
+      "label": { "en": "Cold Beverages", "ar": "مشروبات باردة" },
+      "icon": "images/drink2.png",
+      "subcategories": [
+        { "slug": "iced-coffee", "label": { "en": "Iced Coffee", "ar": "قهوة باردة" } },
+        { "slug": "non-coffee-iced", "label": { "en": "Non-Coffee Iced", "ar": "مشروبات باردة بلا قهوة" } },
+        { "slug": "juices", "label": { "en": "Juices", "ar": "عصائر" } },
+        { "slug": "refreshers", "label": { "en": "Refreshers", "ar": "منعشات" } }
+      ]
+    },
+    {
+      "slug": "bakery",
+      "label": { "en": "Bakery", "ar": "مخبوزات" },
+      "icon": "images/brade.png",
+      "subcategories": [
+        { "slug": "sandwiches", "label": { "en": "Sandwiches", "ar": "سندويجات" } },
+        { "slug": "croissant", "label": { "en": "Croissant", "ar": "كرواسون" } },
+        { "slug": "popular-sandwiches", "label": { "en": "Popular Sandwiches", "ar": "سندويجات شعبية" } }
+      ]
+    },
+    {
+      "slug": "ice-cream",
+      "label": { "en": "Ice Cream", "ar": "آيس كريم" },
+      "icon": "images/11.png",
+      "subcategories": [
+        { "slug": "affogato", "label": { "en": "Affogato", "ar": "أفوقاتو" } }
+      ]
+    }
   ],
   "products": [
-    { "name": { "en": "Double Espresso", "ar": "اسبريسو مزدوج" }, "price": 25.00, "currency": "BHD", "image": "images/3.png", "category": "hot-coffee" },
-    { "name": { "en": "Cortado", "ar": "كورتادو" }, "price": 28.00, "currency": "BHD", "image": "images/4.png", "category": "hot-coffee" },
-    { "name": { "en": "Americano", "ar": "أمريكانو" }, "price": 25.00, "currency": "BHD", "image": "images/3.png", "category": "hot-coffee" },
-    { "name": { "en": "Pour over V60", "ar": "في 60" }, "price": 30.00, "currency": "BHD", "image": "images/4.png", "category": "hot-coffee" },
-    { "name": { "en": "Flatwhite", "ar": "فلات وايت" }, "price": 32.00, "currency": "BHD", "image": "images/3.png", "category": "hot-coffee" },
-    { "name": { "en": "Latte", "ar": "لاتيه" }, "price": 30.00, "currency": "BHD", "image": "images/4.png", "category": "hot-coffee" },
-    { "name": { "en": "Cappuccino", "ar": "كابتشينو" }, "price": 28.00, "currency": "BHD", "image": "images/4.png", "category": "hot-coffee" },
-    { "name": { "en": "Spanish Latte", "ar": "سبانيش لاتيه" }, "price": 35.00, "currency": "BHD", "image": "images/4.png", "category": "hot-coffee" },
-    { "name": { "en": "Salted Caramel", "ar": "سولتد كراميل" }, "price": 38.00, "currency": "BHD", "image": "images/4.png", "category": "hot-coffee" },
-    { "name": { "en": "White Mocha", "ar": "وايت موكا" }, "price": 40.00, "currency": "BHD", "image": "images/4.png", "category": "hot-coffee" },
+    { "name": { "en": "Double Espresso", "ar": "اسبريسو مزدوج" }, "price": 25.00, "currency": "BHD", "image": "images/3.png", "category": "hot-beverages", "subcategory": "hot-coffee" },
+    { "name": { "en": "Cortado", "ar": "كورتادو" }, "price": 28.00, "currency": "BHD", "image": "images/4.png", "category": "hot-beverages", "subcategory": "hot-coffee" },
+    { "name": { "en": "Americano", "ar": "أمريكانو" }, "price": 25.00, "currency": "BHD", "image": "images/3.png", "category": "hot-beverages", "subcategory": "hot-coffee" },
+    { "name": { "en": "Pour over V60", "ar": "في 60" }, "price": 30.00, "currency": "BHD", "image": "images/4.png", "category": "hot-beverages", "subcategory": "hot-coffee" },
+    { "name": { "en": "Flatwhite", "ar": "فلات وايت" }, "price": 32.00, "currency": "BHD", "image": "images/3.png", "category": "hot-beverages", "subcategory": "hot-coffee" },
+    { "name": { "en": "Latte", "ar": "لاتيه" }, "price": 30.00, "currency": "BHD", "image": "images/4.png", "category": "hot-beverages", "subcategory": "hot-coffee" },
+    { "name": { "en": "Cappuccino", "ar": "كابتشينو" }, "price": 28.00, "currency": "BHD", "image": "images/4.png", "category": "hot-beverages", "subcategory": "hot-coffee" },
+    { "name": { "en": "Spanish Latte", "ar": "سبانيش لاتيه" }, "price": 35.00, "currency": "BHD", "image": "images/4.png", "category": "hot-beverages", "subcategory": "hot-coffee" },
+    { "name": { "en": "Salted Caramel", "ar": "سولتد كراميل" }, "price": 38.00, "currency": "BHD", "image": "images/4.png", "category": "hot-beverages", "subcategory": "hot-coffee" },
+    { "name": { "en": "White Mocha", "ar": "وايت موكا" }, "price": 40.00, "currency": "BHD", "image": "images/4.png", "category": "hot-beverages", "subcategory": "hot-coffee" },
 
-    { "name": { "en": "Matcha Latte", "ar": "ماتشا لاتيه" }, "price": 32.00, "currency": "BHD", "image": "images/3.png", "category": "non-coffee" },
+    { "name": { "en": "Matcha Latte", "ar": "ماتشا لاتيه" }, "price": 32.00, "currency": "BHD", "image": "images/3.png", "category": "hot-beverages", "subcategory": "tea" },
+    { "name": { "en": "Black Tea", "ar": "شاي أسود" }, "price": 12.00, "currency": "BHD", "image": "images/hotdrink.png", "category": "hot-beverages", "subcategory": "tea" },
+    { "name": { "en": "Karak Tea", "ar": "شاي كرك" }, "price": 14.00, "currency": "BHD", "image": "images/hotdrink.png", "category": "hot-beverages", "subcategory": "karak" },
 
-    { "name": { "en": "Iced Americano", "ar": "امريكانو بارد" }, "price": 28.00, "currency": "BHD", "image": "images/1.png", "category": "iced-coffee" },
-    { "name": { "en": "Iced V60", "ar": "في 60 بارد" }, "price": 32.00, "currency": "BHD", "image": "images/2.png", "category": "iced-coffee" },
-    { "name": { "en": "Iced Latte", "ar": "لاتيه بارد" }, "price": 30.00, "currency": "BHD", "image": "images/1.png", "category": "iced-coffee" },
-    { "name": { "en": "Sougha Signature Latte", "ar": "سقنتشر لاتيه" }, "price": 35.00, "currency": "BHD", "image": "images/2.png", "category": "iced-coffee" },
-    { "name": { "en": "Iced Spanish", "ar": "سبانيش بارد" }, "price": 38.00, "currency": "BHD", "image": "images/1.png", "category": "iced-coffee" },
-    { "name": { "en": "Iced Salted Caramel", "ar": "سولتد كراميل بارد" }, "price": 40.00, "currency": "BHD", "image": "images/2.png", "category": "iced-coffee" },
-    { "name": { "en": "Iced White Mocha", "ar": "وايت موكا بارد" }, "price": 42.00, "currency": "BHD", "image": "images/1.png", "category": "iced-coffee" },
+    { "name": { "en": "Iced Americano", "ar": "امريكانو بارد" }, "price": 28.00, "currency": "BHD", "image": "images/1.png", "category": "cold-beverages", "subcategory": "iced-coffee" },
+    { "name": { "en": "Iced V60", "ar": "في 60 بارد" }, "price": 32.00, "currency": "BHD", "image": "images/2.png", "category": "cold-beverages", "subcategory": "iced-coffee" },
+    { "name": { "en": "Iced Latte", "ar": "لاتيه بارد" }, "price": 30.00, "currency": "BHD", "image": "images/1.png", "category": "cold-beverages", "subcategory": "iced-coffee" },
+    { "name": { "en": "Sougha Signature Latte", "ar": "سقنتشر لاتيه" }, "price": 35.00, "currency": "BHD", "image": "images/2.png", "category": "cold-beverages", "subcategory": "iced-coffee" },
+    { "name": { "en": "Iced Spanish", "ar": "سبانيش بارد" }, "price": 38.00, "currency": "BHD", "image": "images/1.png", "category": "cold-beverages", "subcategory": "iced-coffee" },
+    { "name": { "en": "Iced Salted Caramel", "ar": "سولتد كراميل بارد" }, "price": 40.00, "currency": "BHD", "image": "images/2.png", "category": "cold-beverages", "subcategory": "iced-coffee" },
+    { "name": { "en": "Iced White Mocha", "ar": "وايت موكا بارد" }, "price": 42.00, "currency": "BHD", "image": "images/1.png", "category": "cold-beverages", "subcategory": "iced-coffee" },
 
-    { "name": { "en": "Iced Matcha Latte", "ar": "ماتشا لاتيه بارد" }, "price": 35.00, "currency": "BHD", "image": "images/2.png", "category": "non-coffee-iced" },
-    { "name": { "en": "Iced Rose", "ar": "وردي بارد" }, "price": 32.00, "currency": "BHD", "image": "images/1.png", "category": "non-coffee-iced" },
-    { "name": { "en": "Matcha Frappe", "ar": "ماتشا فرابيه" }, "price": 38.00, "currency": "BHD", "image": "images/2.png", "category": "non-coffee-iced" },
-    { "name": { "en": "Strawberry Matcha Frappe", "ar": "فرابيه ماتشا فراولة" }, "price": 40.00, "currency": "BHD", "image": "images/1.png", "category": "non-coffee-iced" },
-    { "name": { "en": "Mango Frappe", "ar": "فرابيه مانجو" }, "price": 38.00, "currency": "BHD", "image": "images/2.png", "category": "non-coffee-iced" },
+    { "name": { "en": "Iced Matcha Latte", "ar": "ماتشا لاتيه بارد" }, "price": 35.00, "currency": "BHD", "image": "images/2.png", "category": "cold-beverages", "subcategory": "non-coffee-iced" },
+    { "name": { "en": "Iced Rose", "ar": "وردي بارد" }, "price": 32.00, "currency": "BHD", "image": "images/1.png", "category": "cold-beverages", "subcategory": "non-coffee-iced" },
+    { "name": { "en": "Matcha Frappe", "ar": "ماتشا فرابيه" }, "price": 38.00, "currency": "BHD", "image": "images/2.png", "category": "cold-beverages", "subcategory": "non-coffee-iced" },
+    { "name": { "en": "Strawberry Matcha Frappe", "ar": "فرابيه ماتشا فراولة" }, "price": 40.00, "currency": "BHD", "image": "images/1.png", "category": "cold-beverages", "subcategory": "non-coffee-iced" },
+    { "name": { "en": "Mango Frappe", "ar": "فرابيه مانجو" }, "price": 38.00, "currency": "BHD", "image": "images/2.png", "category": "cold-beverages", "subcategory": "non-coffee-iced" },
 
-    { "name": { "en": "Strawberry Mojito", "ar": "موهيتو فراولة" }, "price": 35.00, "currency": "BHD", "image": "images/1.png", "category": "refresher" },
-    { "name": { "en": "Passion Mojito", "ar": "موهيتو باشن" }, "price": 35.00, "currency": "BHD", "image": "images/2.png", "category": "refresher" },
-    { "name": { "en": "Lemon w/ mint Mojito", "ar": "ليمون نعنع" }, "price": 32.00, "currency": "BHD", "image": "images/1.png", "category": "refresher" },
-    { "name": { "en": "Carcadet", "ar": "كركديه" }, "price": 30.00, "currency": "BHD", "image": "images/2.png", "category": "refresher" },
+    { "name": { "en": "Strawberry Mojito", "ar": "موهيتو فراولة" }, "price": 35.00, "currency": "BHD", "image": "images/1.png", "category": "cold-beverages", "subcategory": "refreshers" },
+    { "name": { "en": "Passion Mojito", "ar": "موهيتو باشن" }, "price": 35.00, "currency": "BHD", "image": "images/2.png", "category": "cold-beverages", "subcategory": "refreshers" },
+    { "name": { "en": "Lemon w/ mint Mojito", "ar": "ليمون نعنع" }, "price": 32.00, "currency": "BHD", "image": "images/1.png", "category": "cold-beverages", "subcategory": "refreshers" },
+    { "name": { "en": "Carcadet", "ar": "كركديه" }, "price": 30.00, "currency": "BHD", "image": "images/2.png", "category": "cold-beverages", "subcategory": "refreshers" },
 
-    { "name": { "en": "Classic Affogato", "ar": "أفوقاتو كلاسيك" }, "price": 45.00, "currency": "BHD", "image": "images/11.png", "category": "ice-cream" },
-    { "name": { "en": "Matcha Affogato", "ar": "ماتشا أفوقاتو" }, "price": 48.00, "currency": "BHD", "image": "images/11.png", "category": "ice-cream" },
-    { "name": { "en": "Lotus Affogato", "ar": "لوتس أفوقاتو" }, "price": 50.00, "currency": "BHD", "image": "images/11.png", "category": "ice-cream" }
+    { "name": { "en": "Classic Affogato", "ar": "أفوقاتو كلاسيك" }, "price": 45.00, "currency": "BHD", "image": "images/11.png", "category": "ice-cream", "subcategory": "affogato" },
+    { "name": { "en": "Matcha Affogato", "ar": "ماتشا أفوقاتو" }, "price": 48.00, "currency": "BHD", "image": "images/11.png", "category": "ice-cream", "subcategory": "affogato" },
+    { "name": { "en": "Lotus Affogato", "ar": "لوتس أفوقاتو" }, "price": 50.00, "currency": "BHD", "image": "images/11.png", "category": "ice-cream", "subcategory": "affogato" },
+
+    { "name": { "en": "Mango Juice", "ar": "عصير مانجو" }, "price": 22.00, "currency": "BHD", "image": "images/2.png", "category": "cold-beverages", "subcategory": "juices" },
+    { "name": { "en": "Orange Juice", "ar": "عصير برتقال" }, "price": 20.00, "currency": "BHD", "image": "images/1.png", "category": "cold-beverages", "subcategory": "juices" },
+
+    { "name": { "en": "Arabic Cake Slice", "ar": "شريحة كيك عربي" }, "price": 18.00, "currency": "BHD", "image": "images/cake.png", "category": "cakes", "subcategory": "arabic-cake" },
+    { "name": { "en": "Italian Tiramisu", "ar": "تيراميسو إيطالي" }, "price": 24.00, "currency": "BHD", "image": "images/cake.png", "category": "cakes", "subcategory": "italian-cake" },
+    { "name": { "en": "Popular Cake", "ar": "كيك شعبي" }, "price": 16.00, "currency": "BHD", "image": "images/cake.png", "category": "cakes", "subcategory": "popular-cake" },
+
+    { "name": { "en": "Chicken Sandwich", "ar": "ساندويش دجاج" }, "price": 26.00, "currency": "BHD", "image": "images/sandwich.png", "category": "bakery", "subcategory": "sandwiches" },
+    { "name": { "en": "Butter Croissant", "ar": "كرواسون زبدة" }, "price": 12.00, "currency": "BHD", "image": "images/carwason.png", "category": "bakery", "subcategory": "croissant" },
+    { "name": { "en": "Popular Sandwich", "ar": "ساندويج شعبي" }, "price": 20.00, "currency": "BHD", "image": "images/brade.png", "category": "bakery", "subcategory": "popular-sandwiches" }
   ]
 }
 
