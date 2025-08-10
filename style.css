@@ -415,6 +415,31 @@ html[dir="rtl"] .categories::after { content: '<'; }
   transition: all 0.5s ease;
 }
 
+/* Subcategory header inside grid */
+.subcategory-header {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: clamp(1.1rem, 1rem + 0.6vw, 1.5rem);
+  font-weight: 700;
+  color: var(--coffee);
+  padding: 0.6rem 0.8rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.2rem;
+  position: relative;
+}
+
+.subcategory-header::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -6px;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--coffee), var(--cramil));
+  border-radius: 2px;
+}
+
 .product-item {
   width: 100%;
 }

@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const menuSection = document.getElementById('menu');
   const categoriesNav = document.getElementById('categories');
   const productGrid = document.getElementById('product-grid');
+  let menuData = null;
   let hasNavigated = false;
 
   // i18n/dir support (prepared)
@@ -48,76 +49,87 @@ document.addEventListener('DOMContentLoaded', function() {
     categoriesNav.appendChild(fragment);
   }
 
-  // Build products
-  function renderProducts(products) {
-    productGrid.innerHTML = '';
-    const fragment = document.createDocumentFragment();
-    products.forEach((p) => {
-      const item = document.createElement('div');
-      item.className = 'product-item';
-      const card = document.createElement('div');
-      card.className = 'product-card';
-      card.dataset.category = p.category;
-      const frame = document.createElement('div');
-      frame.className = 'image-frame';
-      const img = document.createElement('img');
-      img.src = p.image;
-      img.alt = p.name.en;
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      img.width = 400; img.height = 280;
-      frame.appendChild(img);
-      const title = document.createElement('h3');
-      title.textContent = p.name.en;
-      const price = document.createElement('p');
-      price.className = 'price';
-      price.textContent = formatPrice(p.price, p.currency || 'BHD');
-
-      card.appendChild(frame);
-      card.appendChild(title);
-      card.appendChild(price);
-      item.appendChild(card);
-      fragment.appendChild(item);
-    });
-    productGrid.appendChild(fragment);
+  // Build single product card
+  function createProductItem(product) {
+    const item = document.createElement('div');
+    item.className = 'product-item';
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.dataset.category = product.category;
+    if (product.subcategory) card.dataset.subcategory = product.subcategory;
+    const frame = document.createElement('div');
+    frame.className = 'image-frame';
+    const img = document.createElement('img');
+    img.src = product.image;
+    img.alt = product.name.en;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.width = 400; img.height = 280;
+    frame.appendChild(img);
+    const title = document.createElement('h3');
+    title.textContent = product.name.en;
+    const price = document.createElement('p');
+    price.className = 'price';
+    price.textContent = formatPrice(product.price, product.currency || 'BHD');
+    card.appendChild(frame);
+    card.appendChild(title);
+    card.appendChild(price);
+    item.appendChild(card);
+    return item;
   }
 
-  // Filtering using data-category
+  // Build products grouped by subcategory (with headers in the grid)
+  function renderProductsForCategory(categorySlug) {
+    if (!menuData) return;
+    productGrid.innerHTML = '';
+    const fragment = document.createDocumentFragment();
+
+    const categoriesToRender = categorySlug === 'all'
+      ? menuData.categories
+      : menuData.categories.filter(c => c.slug === categorySlug);
+
+    categoriesToRender.forEach((cat) => {
+      const subcategories = Array.isArray(cat.subcategories) && cat.subcategories.length
+        ? cat.subcategories
+        : [{ slug: 'default', label: { en: 'Items', ar: 'المنتجات' } }];
+
+      subcategories.forEach((sub) => {
+        const subProducts = (menuData.products || []).filter(p => p.category === cat.slug && p.subcategory === sub.slug);
+        if (!subProducts.length) return;
+
+        const header = document.createElement('div');
+        header.className = 'subcategory-header';
+        header.textContent = sub.label.en;
+        fragment.appendChild(header);
+
+        subProducts.forEach((p) => {
+          fragment.appendChild(createProductItem(p));
+        });
+      });
+    });
+
+    productGrid.appendChild(fragment);
+    setupRevealAnimations();
+    setTimeout(() => { setupTouchSupport(); }, 0);
+  }
+
+  // Filtering by rebuilding grid per category
   function setupFiltering() {
     const categoryButtons = categoriesNav.querySelectorAll('.category[role="tab"]');
-    const items = productGrid.querySelectorAll('.product-item');
 
-    function applyFilter(slug) {
+    function activateCategory(slug) {
       categoryButtons.forEach(btn => {
         const isActive = btn.dataset.category === slug;
         btn.classList.toggle('active', isActive);
         btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
         btn.tabIndex = isActive ? 0 : -1;
       });
-      items.forEach((item, index) => {
-        const card = item.querySelector('.product-card');
-        const show = slug === 'all' || card.dataset.category === slug;
-        if (show) {
-          item.style.display = 'block';
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(30px) scale(0.95)';
-          setTimeout(() => {
-            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0) scale(1)';
-          }, index * 30);
-        } else {
-          card.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(-20px) scale(0.9)';
-          setTimeout(() => { item.style.display = 'none'; }, 180);
-        }
-      });
+      renderProductsForCategory(slug);
     }
 
     // Click/keyboard handlers
     categoryButtons.forEach((btn, idx) => {
-      btn.addEventListener('click', () => applyFilter(btn.dataset.category));
+      btn.addEventListener('click', () => activateCategory(btn.dataset.category));
       btn.addEventListener('keydown', (e) => {
         const isRtl = document.documentElement.dir === 'rtl';
         let newIndex = idx;
@@ -127,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
           newIndex = isRtl ? idx + 1 : idx - 1;
         } else if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          applyFilter(btn.dataset.category);
+          activateCategory(btn.dataset.category);
           return;
         } else {
           return;
@@ -141,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Activate first category by default
     const first = categoryButtons[0];
-    if (first) applyFilter(first.dataset.category);
+    if (first) activateCategory(first.dataset.category);
   }
 
   // Reveal animations observer
@@ -174,10 +186,9 @@ document.addEventListener('DOMContentLoaded', function() {
     try {
       const res = await fetch('data/menu.json', { cache: 'no-cache' });
       const data = await res.json();
-      // Build UI
+      menuData = data;
       const categories = [{ slug: 'all', label: { en: 'All', ar: 'الكل' }, icon: 'images/elments.png' }, ...data.categories];
       renderCategories(categories);
-      renderProducts(data.products);
       setupRevealAnimations();
       setupFiltering();
     } catch (e) {
