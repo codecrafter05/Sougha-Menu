@@ -4,7 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sougha Menu</title>
+  <meta name="description" content="Interactive, responsive coffee shop menu for Sougha with categories and products." />
+  <meta name="theme-color" content="#f9f5f0" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Sougha Menu" />
+  <meta property="og:description" content="Explore Sougha's elegant and responsive coffee menu." />
+  <meta property="og:image" content="images/logo icon-01.png" />
+  <meta property="og:site_name" content="Sougha" />
 
+  <link rel="icon" type="image/png" href="images/logo icon-01.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 </head>
@@ -13,7 +24,7 @@
   <div class="loader" id="loader">
     <div class="loader-content">
       <div class="loader-logo">
-        <img src="images/logo icon-01.png" alt="Sougha Logo">
+        <img src="images/logo icon-01.png" alt="Sougha Logo" width="300" height="300" decoding="async">
       </div>
     </div>
   </div>
@@ -21,7 +32,7 @@
   <!-- Hero Section -->
   <section class="hero-section" id="hero-section">
     <div class="hero-content">
-      <img src="images/Sougha.png" alt="Sougha Logo" class="hero-logo">
+      <img src="images/Sougha.png" alt="Sougha Logo" class="hero-logo" width="600" height="600" decoding="async">
     </div>
   </section>
 
@@ -32,349 +43,15 @@
       <div class="menu-header">
         <div class="header-content">
           <div class="header-left">
-            <img src="images/1-04.png" alt="Logo" class="header-logo">
+            <img src="images/1-04.png" alt="Logo" class="header-logo" width="200" height="100" loading="lazy" decoding="async">
           </div>
           <div class="header-right">
-            <div class="categories">
-              <div class="category" data-category="hot-coffee">
-                <img src="images/hotdrink.png" alt="Hot Coffee Icon">
-                <span>Hot Coffee</span>
-              </div>
-              <div class="category" data-category="non-coffee">
-                <img src="images/drink2.png" alt="Non-Coffee Icon">
-                <span>Non-Coffee</span>
-              </div>
-              <div class="category" data-category="iced-coffee">
-                <img src="images/drink2.png" alt="Iced Coffee Icon">
-                <span>Iced Coffee</span>
-              </div>
-              <div class="category" data-category="non-coffee-iced">
-                <img src="images/drink2.png" alt="Non-Coffee Iced Icon">
-                <span>Non-Coffee Iced</span>
-              </div>
-              <div class="category" data-category="refresher">
-                <img src="images/drink2.png" alt="Refresher Icon">
-                <span>Refresher Drinks</span>
-              </div>
-              <div class="category" data-category="ice-cream">
-                <img src="images/cake.png" alt="Ice Cream Icon">
-                <span>Ice Cream</span>
-              </div>
-            </div>
+            <nav class="categories" id="categories" aria-label="Menu categories" role="tablist"></nav>
           </div>
         </div>
       </div>
-
       <!-- product -->
-      <div class="product-grid">
-        
-        <!-- Hot Coffee Products -->
-        <div class="product-item">
-          <div class="product-card" data-category="hot-coffee">
-            <div class="image-frame">
-              <img src="images/3.png" alt="Double Espresso" />
-            </div>
-            <h3>Double Espresso</h3>
-            <p class="price">BHD25.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="hot-coffee">
-            <div class="image-frame">
-              <img src="images/4.png" alt="Cortado" />
-            </div>
-            <h3>Cortado</h3>
-            <p class="price">BHD28.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="hot-coffee">
-            <div class="image-frame">
-              <img src="images/3.png" alt="Americano" />
-            </div>
-            <h3>Americano</h3>
-            <p class="price">BHD25.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="hot-coffee">
-            <div class="image-frame">
-              <img src="images/4.png" alt="Pour over V60" />
-            </div>
-            <h3>Pour over V60</h3>
-            <p class="price">BHD30.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="hot-coffee">
-            <div class="image-frame">
-              <img src="images/3.png" alt="Flatwhite" />
-            </div>
-            <h3>Flatwhite</h3>
-            <p class="price">BHD32.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="hot-coffee">
-            <div class="image-frame">
-              <img src="images/4.png" alt="Latte" />
-            </div>
-            <h3>Latte</h3>
-            <p class="price">BHD30.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="hot-coffee">
-            <div class="image-frame">
-              <img src="images/3.png" alt="Cappuccino" />
-            </div>
-            <h3>Cappuccino</h3>
-            <p class="price">BHD28.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="hot-coffee">
-            <div class="image-frame">
-              <img src="images/4.png" alt="Spanish Latte" />
-            </div>
-            <h3>Spanish Latte</h3>
-            <p class="price">BHD35.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="hot-coffee">
-            <div class="image-frame">
-              <img src="images/3.png" alt="Salted Caramel" />
-            </div>
-            <h3>Salted Caramel</h3>
-            <p class="price">BHD38.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="hot-coffee">
-            <div class="image-frame">
-              <img src="images/4.png" alt="White Mocha" />
-            </div>
-            <h3>White Mocha</h3>
-            <p class="price">BHD40.00</p>
-          </div>
-        </div>
-
-        <!-- Non-Coffee Products -->
-        <div class="product-item">
-          <div class="product-card" data-category="non-coffee">
-            <div class="image-frame">
-              <img src="images/3.png" alt="Matcha Latte" />
-            </div>
-            <h3>Matcha Latte</h3>
-            <p class="price">BHD32.00</p>
-          </div>
-        </div>
-
-        <!-- Iced Coffee Products -->
-        <div class="product-item">
-          <div class="product-card" data-category="iced-coffee">
-            <div class="image-frame">
-              <img src="images/1.png" alt="Iced Americano" />
-            </div>
-            <h3>Iced Americano</h3>
-            <p class="price">BHD28.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="iced-coffee">
-            <div class="image-frame">
-              <img src="images/2.png" alt="Iced V60" />
-            </div>
-            <h3>Iced V60</h3>
-            <p class="price">BHD32.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="iced-coffee">
-            <div class="image-frame">
-              <img src="images/1.png" alt="Iced Latte" />
-            </div>
-            <h3>Iced Latte</h3>
-            <p class="price">BHD30.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="iced-coffee">
-            <div class="image-frame">
-              <img src="images/2.png" alt="Sougha Signature Latte" />
-            </div>
-            <h3>Sougha Signature Latte</h3>
-            <p class="price">BHD35.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="iced-coffee">
-            <div class="image-frame">
-              <img src="images/1.png" alt="Iced Spanish" />
-            </div>
-            <h3>Iced Spanish</h3>
-            <p class="price">BHD38.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="iced-coffee">
-            <div class="image-frame">
-              <img src="images/2.png" alt="Iced Salted Caramel" />
-            </div>
-            <h3>Iced Salted Caramel</h3>
-            <p class="price">BHD40.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="iced-coffee">
-            <div class="image-frame">
-              <img src="images/1.png" alt="Iced White Mocha" />
-            </div>
-            <h3>Iced White Mocha</h3>
-            <p class="price">BHD42.00</p>
-          </div>
-        </div>
-
-        <!-- Non-Coffee Iced Products -->
-        <div class="product-item">
-          <div class="product-card" data-category="non-coffee-iced">
-            <div class="image-frame">
-              <img src="images/2.png" alt="Iced Matcha Latte" />
-            </div>
-            <h3>Iced Matcha Latte</h3>
-            <p class="price">BHD35.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="non-coffee-iced">
-            <div class="image-frame">
-              <img src="images/1.png" alt="Iced Rose" />
-            </div>
-            <h3>Iced Rose</h3>
-            <p class="price">BHD32.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="non-coffee-iced">
-            <div class="image-frame">
-              <img src="images/2.png" alt="Matcha Frappe" />
-            </div>
-            <h3>Matcha Frappe</h3>
-            <p class="price">BHD38.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="non-coffee-iced">
-            <div class="image-frame">
-              <img src="images/1.png" alt="Strawberry Matcha Frappe" />
-            </div>
-            <h3>Strawberry Matcha Frappe</h3>
-            <p class="price">BHD40.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="non-coffee-iced">
-            <div class="image-frame">
-              <img src="images/2.png" alt="Mango Frappe" />
-            </div>
-            <h3>Mango Frappe</h3>
-            <p class="price">BHD38.00</p>
-          </div>
-        </div>
-
-        <!-- Refresher Drinks -->
-        <div class="product-item">
-          <div class="product-card" data-category="refresher">
-            <div class="image-frame">
-              <img src="images/1.png" alt="Strawberry Mojito" />
-            </div>
-            <h3>Strawberry Mojito</h3>
-            <p class="price">BHD35.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="refresher">
-            <div class="image-frame">
-              <img src="images/2.png" alt="Passion Mojito" />
-            </div>
-            <h3>Passion Mojito</h3>
-            <p class="price">BHD35.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="refresher">
-            <div class="image-frame">
-              <img src="images/1.png" alt="Lemon w/ mint Mojito" />
-            </div>
-            <h3>Lemon w/ mint Mojito</h3>
-            <p class="price">BHD32.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="refresher">
-            <div class="image-frame">
-              <img src="images/2.png" alt="Carcadet" />
-            </div>
-            <h3>Carcadet</h3>
-            <p class="price">BHD30.00</p>
-          </div>
-        </div>
-
-        <!-- Ice Cream Products -->
-        <div class="product-item">
-          <div class="product-card" data-category="ice-cream">
-            <div class="image-frame">
-              <img src="images/11.png" alt="Classic Affogato" />
-            </div>
-            <h3>Classic Affogato</h3>
-            <p class="price">BHD45.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="ice-cream">
-            <div class="image-frame">
-              <img src="images/11.png" alt="Matcha Affogato" />
-            </div>
-            <h3>Matcha Affogato</h3>
-            <p class="price">BHD48.00</p>
-          </div>
-        </div>
-
-        <div class="product-item">
-          <div class="product-card" data-category="ice-cream">
-            <div class="image-frame">
-              <img src="images/11.png" alt="Lotus Affogato" />
-            </div>
-            <h3>Lotus Affogato</h3>
-            <p class="price">BHD50.00</p>
-          </div>
-        </div>
-
-      </div>
+      <div class="product-grid" id="product-grid"></div>
     </div>
   </section>
 
