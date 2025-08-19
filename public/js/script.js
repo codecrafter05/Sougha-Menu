@@ -8,11 +8,27 @@ document.addEventListener('DOMContentLoaded', function() {
   let menuData = null;
   let hasNavigated = false;
 
-  // i18n/dir support (prepared)
+  // i18n/dir support + runtime switching
+  let currentLang = 'en';
   function setLanguage(lang) {
     const isArabic = lang === 'ar';
+    currentLang = lang;
     document.documentElement.lang = lang;
     document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
+    // Re-render categories/products with current selection
+    if (menuData) {
+      const activeBtn = document.querySelector('.category.active');
+      const activeSlug = activeBtn ? activeBtn.dataset.category : 'all';
+      renderCategories([{ slug: 'all', label: { en: 'All', ar: 'الكل' }, icon: 'images/elments.png' }, ...menuData.categories]);
+      setupFiltering();
+      renderProductsForCategory(activeSlug);
+      // sync lang buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        const isActive = btn.dataset.lang === currentLang;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+    }
   }
   setLanguage('en');
 
@@ -37,10 +53,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const img = document.createElement('img');
       img.src = cat.icon;
-      img.alt = `${cat.label.en} Icon`;
+      img.alt = `${cat.label[currentLang]} Icon`;
       img.width = 55; img.height = 55; img.loading = 'lazy'; img.decoding = 'async';
       const span = document.createElement('span');
-      span.textContent = cat.label.en;
+      span.textContent = cat.label[currentLang];
 
       button.appendChild(img);
       button.appendChild(span);
@@ -61,13 +77,13 @@ document.addEventListener('DOMContentLoaded', function() {
     frame.className = 'image-frame';
     const img = document.createElement('img');
     img.src = product.image;
-    img.alt = product.name.en;
+    img.alt = product.name[currentLang];
     img.loading = 'lazy';
     img.decoding = 'async';
     img.width = 400; img.height = 280;
     frame.appendChild(img);
     const title = document.createElement('h3');
-    title.textContent = product.name.en;
+    title.textContent = product.name[currentLang];
     const price = document.createElement('p');
     price.className = 'price';
     price.textContent = formatPrice(product.price, product.currency || 'BHD');
@@ -99,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const header = document.createElement('div');
         header.className = 'subcategory-header';
-        header.textContent = sub.label.en;
+        header.textContent = sub.label[currentLang] || sub.label.en;
         fragment.appendChild(header);
 
         subProducts.forEach((p) => {
@@ -184,13 +200,31 @@ document.addEventListener('DOMContentLoaded', function() {
   // Load data and render
   async function initMenu() {
     try {
-      const res = await fetch('data/menu.json', { cache: 'no-cache' });
-      const data = await res.json();
+      // Prefer backend API if available, fallback to local JSON
+      let data = null;
+      try {
+        const apiUrl = (window.PUBLIC_MENU_ENDPOINT || '/api/menu');
+        const apiRes = await fetch(apiUrl, { cache: 'no-cache' });
+        if (apiRes.ok) {
+          data = await apiRes.json();
+        }
+      } catch (_) {}
+      if (!data) {
+        const res = await fetch('data/menu.json', { cache: 'no-cache' });
+        data = await res.json();
+      }
       menuData = data;
       const categories = [{ slug: 'all', label: { en: 'All', ar: 'الكل' }, icon: 'images/elments.png' }, ...data.categories];
       renderCategories(categories);
       setupRevealAnimations();
       setupFiltering();
+      // wire language switch buttons
+      const langSwitch = document.getElementById('lang-switch');
+      if (langSwitch) {
+        langSwitch.querySelectorAll('.lang-btn').forEach(btn => {
+          btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+        });
+      }
     } catch (e) {
       console.error('Failed to load menu data', e);
     }
