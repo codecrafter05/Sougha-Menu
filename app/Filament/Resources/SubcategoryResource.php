@@ -39,19 +39,19 @@ class SubcategoryResource extends Resource
                 TextInput::make('label_ar')->label('Name (AR)')->required()->maxLength(255),
                 TextInput::make('slug')->label('Slug')->disabled()->dehydrated(false),
                 Toggle::make('is_active')->label('Active')->default(true),
-                TextInput::make('sort_order')->numeric()->default(0)->label('Sort Order'),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->reorderable('sort_order')
+            ->defaultSort('sort_order', 'asc')
             ->columns([
                 TextColumn::make('category.label_en')->label('Category')->sortable()->searchable(),
                 TextColumn::make('label_en')->label('EN')->sortable()->searchable(),
                 TextColumn::make('label_ar')->label('AR')->sortable()->searchable(),
                 TextColumn::make('slug')->label('Slug')->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('sort_order')->sortable(),
                 IconColumn::make('is_active')->boolean()->label('Active')->sortable(),
             ])
             ->filters([

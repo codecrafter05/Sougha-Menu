@@ -41,19 +41,19 @@ class CategoryResource extends Resource
                     ->imageEditor()
                     ->required(false),
                 Toggle::make('is_active')->label('Active')->default(true),
-                TextInput::make('sort_order')->numeric()->default(0)->label('Sort Order'),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->reorderable('sort_order')
+            ->defaultSort('sort_order', 'asc')
             ->columns([
                 ImageColumn::make('icon_path')->label('Icon')->disk('public'),
                 TextColumn::make('label_en')->label('EN')->searchable()->sortable(),
                 TextColumn::make('label_ar')->label('AR')->searchable()->sortable(),
                 TextColumn::make('slug')->label('Slug')->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('sort_order')->sortable(),
                 IconColumn::make('is_active')->boolean()->label('Active')->sortable(),
             ])
             ->filters([

@@ -59,13 +59,14 @@ class ProductResource extends Resource
                     ->directory('products/images')
                     ->imageEditor(),
                 Toggle::make('is_active')->label('Active')->default(true),
-                TextInput::make('sort_order')->numeric()->default(0)->label('Sort Order'),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->reorderable('sort_order')
+            ->defaultSort('sort_order', 'asc')
             ->columns([
                 ImageColumn::make('image_path')->label('Image')->disk('public'),
                 TextColumn::make('category.label_en')->label('Category')->sortable()->searchable(),
