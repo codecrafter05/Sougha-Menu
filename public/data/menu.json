@@ -1,0 +1,226 @@
+{
+  "categories": [
+    {
+      "slug": "hot-drinks",
+      "label": {
+        "en": "Hot Drinks",
+        "ar": "مشروبات ساخنة"
+      },
+      "icon": "images/hotdrink.png"
+    },
+    {
+      "slug": "cold-drinks",
+      "label": {
+        "en": "Cold Drinks",
+        "ar": "مشروبات باردة"
+      },
+      "icon": "images/drink.png"
+    },
+    {
+      "slug": "iced-coffee",
+      "label": {
+        "en": "Iced Coffee",
+        "ar": "قهوة مثلجة"
+      },
+      "icon": "images/iced-shaken.png"
+    },
+    {
+      "slug": "food",
+      "label": {
+        "en": "Food",
+        "ar": "طعام"
+      },
+      "icon": "images/sandwich.png"
+    },
+    {
+      "slug": "desserts",
+      "label": {
+        "en": "Desserts",
+        "ar": "حلويات"
+      },
+      "icon": "images/cake.png"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": {
+        "en": "Espresso",
+        "ar": "اسبريسو"
+      },
+      "description": {
+        "en": "Strong Italian coffee",
+        "ar": "قهوة إيطالية قوية"
+      },
+      "price": 1.500,
+      "currency": "BHD",
+      "category": "hot-drinks",
+      "image": "images/1-01.png"
+    },
+    {
+      "id": 2,
+      "name": {
+        "en": "Cappuccino",
+        "ar": "كابتشينو"
+      },
+      "description": {
+        "en": "Espresso with steamed milk foam",
+        "ar": "اسبريسو مع رغوة الحليب"
+      },
+      "price": 2.000,
+      "currency": "BHD",
+      "category": "hot-drinks",
+      "image": "images/1-02.png"
+    },
+    {
+      "id": 3,
+      "name": {
+        "en": "Latte",
+        "ar": "لاتيه"
+      },
+      "description": {
+        "en": "Espresso with steamed milk",
+        "ar": "اسبريسو مع الحليب المبخر"
+      },
+      "price": 2.200,
+      "currency": "BHD",
+      "category": "hot-drinks",
+      "image": "images/1-03.png"
+    },
+    {
+      "id": 4,
+      "name": {
+        "en": "Americano",
+        "ar": "أمريكانو"
+      },
+      "description": {
+        "en": "Espresso with hot water",
+        "ar": "اسبريسو مع الماء الساخن"
+      },
+      "price": 1.800,
+      "currency": "BHD",
+      "category": "hot-drinks",
+      "image": "images/1-04.png"
+    },
+    {
+      "id": 5,
+      "name": {
+        "en": "Mocha",
+        "ar": "موكا"
+      },
+      "description": {
+        "en": "Espresso with chocolate and milk",
+        "ar": "اسبريسو مع الشوكولاتة والحليب"
+      },
+      "price": 2.500,
+      "currency": "BHD",
+      "category": "hot-drinks",
+      "image": "images/1-05.png"
+    },
+    {
+      "id": 6,
+      "name": {
+        "en": "Iced Latte",
+        "ar": "لاتيه مثلج"
+      },
+      "description": {
+        "en": "Cold latte with ice",
+        "ar": "لاتيه بارد مع الثلج"
+      },
+      "price": 2.400,
+      "currency": "BHD",
+      "category": "cold-drinks",
+      "image": "images/1-06.png"
+    },
+    {
+      "id": 7,
+      "name": {
+        "en": "Iced Americano",
+        "ar": "أمريكانو مثلج"
+      },
+      "description": {
+        "en": "Cold Americano with ice",
+        "ar": "أمريكانو بارد مع الثلج"
+      },
+      "price": 2.000,
+      "currency": "BHD",
+      "category": "cold-drinks",
+      "image": "images/2.png"
+    },
+    {
+      "id": 8,
+      "name": {
+        "en": "Iced Shaken Espresso",
+        "ar": "اسبريسو مثلج مهزوز"
+      },
+      "description": {
+        "en": "Shaken espresso with ice",
+        "ar": "اسبريسو مهزوز مع الثلج"
+      },
+      "price": 2.200,
+      "currency": "BHD",
+      "category": "iced-coffee",
+      "image": "images/iced-shaken.png"
+    },
+    {
+      "id": 9,
+      "name": {
+        "en": "Sandwich",
+        "ar": "ساندويتش"
+      },
+      "description": {
+        "en": "Fresh sandwich with your choice of filling",
+        "ar": "ساندويتش طازج مع حشوة من اختيارك"
+      },
+      "price": 3.500,
+      "currency": "BHD",
+      "category": "food",
+      "image": "images/sandwich.png"
+    },
+    {
+      "id": 10,
+      "name": {
+        "en": "Croissant",
+        "ar": "كرواسون"
+      },
+      "description": {
+        "en": "Buttery French croissant",
+        "ar": "كرواسون فرنسي بالزبدة"
+      },
+      "price": 2.000,
+      "currency": "BHD",
+      "category": "food",
+      "image": "images/carwason.png"
+    },
+    {
+      "id": 11,
+      "name": {
+        "en": "Chocolate Cake",
+        "ar": "كيك شوكولاتة"
+      },
+      "description": {
+        "en": "Rich chocolate cake",
+        "ar": "كيك شوكولاتة غني"
+      },
+      "price": 3.000,
+      "currency": "BHD",
+      "category": "desserts",
+      "image": "images/cake.png"
+    },
+    {
+      "id": 12,
+      "name": {
+        "en": "Cheesecake",
+        "ar": "تشيز كيك"
+      },
+      "description": {
+        "en": "Creamy New York style cheesecake",
+        "ar": "تشيز كيك نيويورك كريمي"
+      },
+      "price": 3.500,
+      "currency": "BHD",
+      "category": "desserts",
+      "image": "images/bon1.png"
+    }
+  ]
+}
