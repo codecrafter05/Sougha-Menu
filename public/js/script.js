@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
         data = await res.json();
       }
       menuData = data;
-      const categories = [{ slug: 'all', label: { en: 'All', ar: 'الكل' }, icon: 'images/elments.png' }, ...data.categories];
+      const categories = [{ slug: 'all', label: { en: 'All', ar: 'الكل' }, icon: 'images/allicon.png' }, ...data.categories];
       renderCategories(categories);
       setupRevealAnimations();
       setupFiltering();
