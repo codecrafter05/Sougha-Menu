@@ -100,6 +100,11 @@ document.addEventListener('DOMContentLoaded', function() {
     img.loading = 'lazy';
     img.decoding = 'async';
     img.width = 400; img.height = 280;
+    
+    // Add click event to open modal
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => openProductModal(product));
+    
     frame.appendChild(img);
     const title = document.createElement('h3');
     title.textContent = product.name[currentLang];
@@ -300,8 +305,58 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Product Modal Functions
+  function openProductModal(product) {
+    const modal = document.getElementById('product-modal');
+    const modalImage = document.getElementById('modal-product-image');
+    
+    // Set modal content
+    modalImage.src = product.image;
+    modalImage.alt = product.name[currentLang];
+    
+    // Show modal
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent background scroll
+    
+    // Focus management
+    const closeBtn = document.getElementById('modal-close');
+    closeBtn.focus();
+  }
+
+  function closeProductModal() {
+    const modal = document.getElementById('product-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scroll
+  }
+
+  // Modal event listeners
+  function setupModalEvents() {
+    const modal = document.getElementById('product-modal');
+    const overlay = document.getElementById('modal-overlay');
+    const closeBtn = document.getElementById('modal-close');
+    
+    // Close on overlay click
+    overlay.addEventListener('click', closeProductModal);
+    
+    // Close on close button click
+    closeBtn.addEventListener('click', closeProductModal);
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeProductModal();
+      }
+    });
+    
+    // Prevent modal content clicks from closing modal
+    modal.querySelector('.modal-content').addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
+
   // Initialize data-driven menu early
   initMenu().then(() => {
     setTimeout(() => { setupTouchSupport(); }, 4000);
+    setupModalEvents(); // Setup modal functionality
   });
 });
