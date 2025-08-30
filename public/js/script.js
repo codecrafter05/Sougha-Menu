@@ -108,12 +108,35 @@ document.addEventListener('DOMContentLoaded', function() {
     frame.appendChild(img);
     const title = document.createElement('h3');
     title.textContent = product.name[currentLang];
-    const price = document.createElement('p');
-    price.className = 'price';
-    price.textContent = formatPrice(product.price, product.currency || 'BHD');
+    
+    // Create price container
+    const priceContainer = document.createElement('div');
+    priceContainer.className = 'price-container';
+    
+    // Main price
+    const mainPrice = document.createElement('p');
+    mainPrice.className = 'price main-price';
+    mainPrice.textContent = formatPrice(product.price, product.currency || 'BHD');
+    priceContainer.appendChild(mainPrice);
+    
+    // Additional prices if they exist
+    if (product.price_two) {
+        const priceTwo = document.createElement('p');
+        priceTwo.className = 'price additional-price';
+        priceTwo.textContent = formatPrice(product.price_two, product.currency || 'BHD');
+        priceContainer.appendChild(priceTwo);
+    }
+    
+    if (product.price_three) {
+        const priceThree = document.createElement('p');
+        priceThree.className = 'price additional-price';
+        priceThree.textContent = formatPrice(product.price_three, product.currency || 'BHD');
+        priceContainer.appendChild(priceThree);
+    }
+    
     card.appendChild(frame);
     card.appendChild(title);
-    card.appendChild(price);
+    card.appendChild(priceContainer);
     item.appendChild(card);
     return item;
   }

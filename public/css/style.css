@@ -575,11 +575,35 @@ html[dir="rtl"] .categories::after { content: '<'; }
   line-height: 1.3;
 }
 
+.price-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+}
+
 .price {
   font-weight: bold;
   color: var(--coffee);
-  margin-bottom: 0.8rem;
+  margin: 0;
   font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.15rem);
+  background: linear-gradient(45deg, var(--coffee), var(--cramil));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.main-price {
+  font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.15rem);
+  font-weight: bold;
+}
+
+.additional-price {
+  font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.15rem);
+  font-weight: bold;
   background: linear-gradient(45deg, var(--coffee), var(--cramil));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -615,6 +639,17 @@ html[dir="rtl"] .categories::after { content: '<'; }
 }
 
 /* Responsive Design - Mobile First */
+
+/* Mobile adjustments for horizontal prices */
+@media (max-width: 480px) {
+  .price-container {
+    gap: 0.3rem;
+  }
+  
+  .price {
+    font-size: clamp(0.85rem, 0.8rem + 0.3vw, 1.05rem);
+  }
+}
 
 /* Tablet (768px and up) */
 @media (min-width: 768px) {

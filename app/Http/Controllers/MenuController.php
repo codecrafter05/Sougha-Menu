@@ -50,6 +50,8 @@ class MenuController extends Controller
                         'ar' => $p->name_ar,
                     ],
                     'price' => (float) $p->price,
+                    'price_two' => $p->price_two ? (float) $p->price_two : null,
+                    'price_three' => $p->price_three ? (float) $p->price_three : null,
                     'currency' => $p->currency,
                     'image' => $p->image_path ? Storage::url($p->image_path) : null,
                     'category' => optional($p->category)->slug,
