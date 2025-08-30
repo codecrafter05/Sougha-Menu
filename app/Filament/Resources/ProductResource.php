@@ -50,7 +50,7 @@ class ProductResource extends Resource
                     ->preload(),
                 TextInput::make('name_en')->label('Name (EN)')->required()->maxLength(255),
                 TextInput::make('name_ar')->label('Name (AR)')->required()->maxLength(255),
-                TextInput::make('price')->label('Price')->numeric()->required()->step('0.01'),
+                TextInput::make('price')->label('Price')->numeric()->required()->step('0.001')->minValue(0),
                 TextInput::make('currency')->label('Currency')->default('BHD')->disabled(),
                 FileUpload::make('image_path')
                     ->label('Image')
@@ -73,7 +73,7 @@ class ProductResource extends Resource
                 TextColumn::make('subcategory.label_en')->label('Subcategory')->toggleable(isToggledHiddenByDefault: true)->sortable()->searchable(),
                 TextColumn::make('name_en')->label('Name EN')->sortable()->searchable(),
                 TextColumn::make('name_ar')->label('Name AR')->toggleable(isToggledHiddenByDefault: true)->sortable()->searchable(),
-                TextColumn::make('price')->label('Price')->money('BHD', divideBy: 1)->sortable(),
+                TextColumn::make('price')->label('Price')->money('BHD', divideBy: 1)->formatStateUsing(fn ($state) => number_format($state, 3) . ' BHD')->sortable(),
                 IconColumn::make('is_active')->boolean()->label('Active')->sortable(),
             ])
             ->filters([

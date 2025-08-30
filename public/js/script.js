@@ -33,8 +33,27 @@ document.addEventListener('DOMContentLoaded', function() {
   setLanguage('en');
 
   // Price formatter (BHD default)
-  const formatPrice = (value, currency = 'BHD', locale = 'en-BH') =>
-    new Intl.NumberFormat(locale, { style: 'currency', currency, minimumFractionDigits: 2 }).format(value);
+  const formatPrice = (value, currency = 'BHD', locale = 'en-BH') => {
+    // Convert to number and handle decimal places properly
+    const numValue = parseFloat(value);
+    
+    // Determine decimal places based on price value
+    let decimalPlaces = 2; // Default for prices >= 10
+    
+    // For prices < 10, use 3 decimal places (like 1.900, 2.500)
+    if (numValue < 10) {
+      decimalPlaces = 3;
+    }
+    
+    const options = {
+      style: 'currency',
+      currency,
+      minimumFractionDigits: decimalPlaces,
+      maximumFractionDigits: decimalPlaces
+    };
+    
+    return new Intl.NumberFormat(locale, options).format(numValue);
+  };
 
   // Build categories
   function renderCategories(categories) {

@@ -530,7 +530,7 @@ html[dir="rtl"] .categories::after { content: '<'; }
   justify-content: center;
   overflow: hidden;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--matcha) 0%, var(--creme-light) 100%);
+  /* background: linear-gradient(135deg, var(--matcha) 0%, var(--creme-light) 100%); */
   flex-grow: 1;
   margin-bottom: 0.8rem;
   position: relative;
