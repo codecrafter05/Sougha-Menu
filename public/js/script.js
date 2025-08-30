@@ -33,8 +33,27 @@ document.addEventListener('DOMContentLoaded', function() {
   setLanguage('en');
 
   // Price formatter (BHD default)
-  const formatPrice = (value, currency = 'BHD', locale = 'en-BH') =>
-    new Intl.NumberFormat(locale, { style: 'currency', currency, minimumFractionDigits: 2 }).format(value);
+  const formatPrice = (value, currency = 'BHD', locale = 'en-BH') => {
+    // Convert to number and handle decimal places properly
+    const numValue = parseFloat(value);
+    
+    // Determine decimal places based on price value
+    let decimalPlaces = 2; // Default for prices >= 10
+    
+    // For prices < 10, use 3 decimal places (like 1.900, 2.500)
+    if (numValue < 10) {
+      decimalPlaces = 3;
+    }
+    
+    const options = {
+      style: 'currency',
+      currency,
+      minimumFractionDigits: decimalPlaces,
+      maximumFractionDigits: decimalPlaces
+    };
+    
+    return new Intl.NumberFormat(locale, options).format(numValue);
+  };
 
   // Build categories
   function renderCategories(categories) {
@@ -81,15 +100,43 @@ document.addEventListener('DOMContentLoaded', function() {
     img.loading = 'lazy';
     img.decoding = 'async';
     img.width = 400; img.height = 280;
+    
+    // Add click event to open modal
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => openProductModal(product));
+    
     frame.appendChild(img);
     const title = document.createElement('h3');
     title.textContent = product.name[currentLang];
-    const price = document.createElement('p');
-    price.className = 'price';
-    price.textContent = formatPrice(product.price, product.currency || 'BHD');
+    
+    // Create price container
+    const priceContainer = document.createElement('div');
+    priceContainer.className = 'price-container';
+    
+    // Main price
+    const mainPrice = document.createElement('p');
+    mainPrice.className = 'price main-price';
+    mainPrice.textContent = formatPrice(product.price, product.currency || 'BHD');
+    priceContainer.appendChild(mainPrice);
+    
+    // Additional prices if they exist
+    if (product.price_two) {
+        const priceTwo = document.createElement('p');
+        priceTwo.className = 'price additional-price';
+        priceTwo.textContent = formatPrice(product.price_two, product.currency || 'BHD');
+        priceContainer.appendChild(priceTwo);
+    }
+    
+    if (product.price_three) {
+        const priceThree = document.createElement('p');
+        priceThree.className = 'price additional-price';
+        priceThree.textContent = formatPrice(product.price_three, product.currency || 'BHD');
+        priceContainer.appendChild(priceThree);
+    }
+    
     card.appendChild(frame);
     card.appendChild(title);
-    card.appendChild(price);
+    card.appendChild(priceContainer);
     item.appendChild(card);
     return item;
   }
@@ -281,8 +328,58 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Product Modal Functions
+  function openProductModal(product) {
+    const modal = document.getElementById('product-modal');
+    const modalImage = document.getElementById('modal-product-image');
+    
+    // Set modal content
+    modalImage.src = product.image;
+    modalImage.alt = product.name[currentLang];
+    
+    // Show modal
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent background scroll
+    
+    // Focus management
+    const closeBtn = document.getElementById('modal-close');
+    closeBtn.focus();
+  }
+
+  function closeProductModal() {
+    const modal = document.getElementById('product-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scroll
+  }
+
+  // Modal event listeners
+  function setupModalEvents() {
+    const modal = document.getElementById('product-modal');
+    const overlay = document.getElementById('modal-overlay');
+    const closeBtn = document.getElementById('modal-close');
+    
+    // Close on overlay click
+    overlay.addEventListener('click', closeProductModal);
+    
+    // Close on close button click
+    closeBtn.addEventListener('click', closeProductModal);
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeProductModal();
+      }
+    });
+    
+    // Prevent modal content clicks from closing modal
+    modal.querySelector('.modal-content').addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
+
   // Initialize data-driven menu early
   initMenu().then(() => {
     setTimeout(() => { setupTouchSupport(); }, 4000);
+    setupModalEvents(); // Setup modal functionality
   });
 });

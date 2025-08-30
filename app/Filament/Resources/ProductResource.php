@@ -50,7 +50,9 @@ class ProductResource extends Resource
                     ->preload(),
                 TextInput::make('name_en')->label('Name (EN)')->required()->maxLength(255),
                 TextInput::make('name_ar')->label('Name (AR)')->required()->maxLength(255),
-                TextInput::make('price')->label('Price')->numeric()->required()->step('0.01'),
+                TextInput::make('price')->label('Price')->numeric()->required()->step('0.001')->minValue(0),
+                TextInput::make('price_two')->label('Price Two')->numeric()->step('0.001')->minValue(0)->placeholder('Optional - Leave empty if single price'),
+                TextInput::make('price_three')->label('Price Three')->numeric()->step('0.001')->minValue(0)->placeholder('Optional - Leave empty if single price'),
                 TextInput::make('currency')->label('Currency')->default('BHD')->disabled(),
                 FileUpload::make('image_path')
                     ->label('Image')
@@ -73,7 +75,12 @@ class ProductResource extends Resource
                 TextColumn::make('subcategory.label_en')->label('Subcategory')->toggleable(isToggledHiddenByDefault: true)->sortable()->searchable(),
                 TextColumn::make('name_en')->label('Name EN')->sortable()->searchable(),
                 TextColumn::make('name_ar')->label('Name AR')->toggleable(isToggledHiddenByDefault: true)->sortable()->searchable(),
-                TextColumn::make('price')->label('Price')->money('BHD', divideBy: 1)->sortable(),
+                TextColumn::make('price')->label('Price')->money('BHD', divideBy: 1)->formatStateUsing(function ($state, $record) {
+                    $prices = [$state];
+                    if ($record->price_two) $prices[] = $record->price_two;
+                    if ($record->price_three) $prices[] = $record->price_three;
+                    return implode(' / ', array_map(fn($p) => number_format($p, 3), $prices)) . ' BHD';
+                })->sortable(),
                 IconColumn::make('is_active')->boolean()->label('Active')->sortable(),
             ])
             ->filters([

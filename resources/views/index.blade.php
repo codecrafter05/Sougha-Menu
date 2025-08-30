@@ -89,6 +89,25 @@
       <div class="product-grid" id="product-grid"></div>
     </div>
   </section>
+
+  <!-- Product Modal -->
+  <div class="product-modal" id="product-modal">
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close" aria-label="إغلاق | Close">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="modal-body">
+        <div class="modal-image-container">
+          <img id="modal-product-image" src="" alt="" class="modal-product-image">
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>
