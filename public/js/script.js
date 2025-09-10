@@ -37,12 +37,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Convert to number and handle decimal places properly
     const numValue = parseFloat(value);
     
-    // Determine decimal places based on price value
-    let decimalPlaces = 2; // Default for prices >= 10
+    // Determine decimal places based on whether the price has meaningful fractional part
+    let decimalPlaces = 2; // Default for whole numbers or prices ending in .000
     
-    // For prices < 10, use 3 decimal places (like 1.900, 2.500)
-    if (numValue < 10) {
-      decimalPlaces = 3;
+    // Check if the price has meaningful fractional digits (not just .000)
+    const priceStr = numValue.toString();
+    if (priceStr.includes('.')) {
+      const fractionalPart = priceStr.split('.')[1];
+      // If fractional part has non-zero digits, use 3 decimal places
+      if (fractionalPart && fractionalPart !== '000' && !fractionalPart.match(/^0+$/)) {
+        decimalPlaces = 3;
+      }
     }
     
     const options = {
