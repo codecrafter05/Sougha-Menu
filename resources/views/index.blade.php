@@ -100,11 +100,66 @@
       <div class="menu-header">
         <div class="header-content">
           <div class="header-right">
-            <nav class="categories" id="categories" aria-label="فئات القائمة | Menu Categories" role="tablist"></nav>
+            <nav class="categories" id="categories" aria-label="فئات القائمة | Menu Categories" role="tablist">
+              @if(isset($categories))
+                @foreach($categories as $index => $category)
+                  <button 
+                    class="category-btn {{ $index === 0 ? 'active' : '' }}" 
+                    data-category="{{ $category['slug'] }}" 
+                    role="tab" 
+                    aria-selected="{{ $index === 0 ? 'true' : 'false' }}"
+                    aria-controls="product-grid"
+                  >
+                    @if($category['icon'])
+                      <img src="{{ $category['icon'] }}" alt="{{ $category['label']['ar'] }}" class="category-icon" loading="lazy">
+                    @endif
+                    <span class="category-label" data-en="{{ $category['label']['en'] }}" data-ar="{{ $category['label']['ar'] }}">
+                      {{ $category['label']['ar'] }}
+                    </span>
+                  </button>
+                @endforeach
+              @endif
+            </nav>
           </div>
         </div>
       </div>
-      <div class="product-grid" id="product-grid"></div>
+      <div class="product-grid" id="product-grid">
+        @if(isset($products))
+          @foreach($products as $product)
+            <div class="product-card" data-category="{{ $product['category'] }}" data-subcategory="{{ $product['subcategory'] }}">
+              <div class="product-image-container">
+                @if($product['image'])
+                  <img src="{{ $product['image'] }}" alt="{{ $product['name']['ar'] }}" class="product-image" loading="lazy" decoding="async">
+                @else
+                  <div class="product-placeholder">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21,15 16,10 5,21"/>
+                    </svg>
+                  </div>
+                @endif
+              </div>
+              <div class="product-info">
+                <h3 class="product-name" data-en="{{ $product['name']['en'] }}" data-ar="{{ $product['name']['ar'] }}">
+                  {{ $product['name']['ar'] }}
+                </h3>
+                <div class="product-pricing">
+                  @if($product['price'])
+                    <span class="price">{{ $product['price'] }} {{ $product['currency'] }}</span>
+                  @endif
+                  @if($product['price_two'])
+                    <span class="price-secondary">{{ $product['price_two'] }} {{ $product['currency'] }}</span>
+                  @endif
+                  @if($product['price_three'])
+                    <span class="price-tertiary">{{ $product['price_three'] }} {{ $product['currency'] }}</span>
+                  @endif
+                </div>
+              </div>
+            </div>
+          @endforeach
+        @endif
+      </div>
     </div>
   </section>
 
@@ -126,6 +181,15 @@
     </div>
   </div>
 
+  <!-- Pass data to JavaScript -->
+  <script>
+    window.menuData = {
+      categories: @json($categories ?? []),
+      products: @json($products ?? []),
+      currentCategory: @json($currentCategory ?? null)
+    };
+  </script>
+  
   <script src="{{ asset('js/script.js') }}"></script>
   
   <!-- PWA Service Worker Registration -->
