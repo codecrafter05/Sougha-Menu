@@ -46,6 +46,24 @@
   <link rel="icon" type="image/png" href="{{ asset('images/logo icon-01.png') }}" />
   <link rel="manifest" href="{{ asset('manifest.webmanifest') }}" />
   
+  <!-- PWA Meta Tags -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="صوغة | Sougha" />
+  <meta name="msapplication-TileColor" content="#5e4636" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  
+  <!-- Apple Touch Icons -->
+  <link rel="apple-touch-icon" href="{{ asset('images/logo icon-01.png') }}" />
+  <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('images/logo icon-01.png') }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/logo icon-01.png') }}" />
+  <link rel="apple-touch-icon" sizes="167x167" href="{{ asset('images/logo icon-01.png') }}" />
+  
+  <!-- Microsoft Tiles -->
+  <meta name="msapplication-TileImage" content="{{ asset('images/logo icon-01.png') }}" />
+  <meta name="msapplication-config" content="none" />
+  
   <!-- Preconnect for Performance -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -109,6 +127,64 @@
   </div>
 
   <script src="{{ asset('js/script.js') }}"></script>
+  
+  <!-- PWA Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js')
+          .then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          })
+          .catch(function(err) {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      });
+    }
+    
+    // PWA Install Prompt
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      
+      // Show install button
+      const installBtn = document.createElement('button');
+      installBtn.innerHTML = 'تثبيت التطبيق | Install App';
+      installBtn.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #5e4636;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        z-index: 1000;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      `;
+      
+      installBtn.addEventListener('click', () => {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+          }
+          deferredPrompt = null;
+          installBtn.remove();
+        });
+      });
+      
+      document.body.appendChild(installBtn);
+    });
+    
+    // Handle app installed
+    window.addEventListener('appinstalled', (evt) => {
+      console.log('PWA was installed');
+    });
+  </script>
 </body>
 </html>
 
