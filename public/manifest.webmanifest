@@ -1,21 +1,54 @@
 {
-  "name": "Sougha Menu",
-  "short_name": "Sougha",
-  "start_url": ".",
+  "name": "صوغة - كوفي شوب | Sougha Coffee Shop",
+  "short_name": "صوغة | Sougha",
+  "description": "استمتع بأفضل القهوة الإيطالية والحلويات الشعبية في صوغة - كوفي شوب مميز في مجمع الأفنيوز البحرين",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#f9f5f0",
-  "theme_color": "#f9f5f0",
+  "theme_color": "#5e4636",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "ar",
+  "dir": "rtl",
   "icons": [
     {
       "src": "images/logo icon-01.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "images/logo icon-01.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/logo icon-02.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "images/logo icon-03.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["food", "lifestyle", "business"],
+  "shortcuts": [
+    {
+      "name": "القائمة | Menu",
+      "short_name": "Menu",
+      "description": "عرض قائمة الطعام",
+      "url": "/",
+      "icons": [
+        {
+          "src": "images/logo icon-01.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }
-
