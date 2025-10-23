@@ -50,6 +50,14 @@ class ProductResource extends Resource
                     ->preload(),
                 TextInput::make('name_en')->label('Name (EN)')->required()->maxLength(255),
                 TextInput::make('name_ar')->label('Name (AR)')->required()->maxLength(255),
+                Forms\Components\Textarea::make('description_en')
+                    ->label('Description (EN)')
+                    ->rows(3)
+                    ->columnSpanFull(),
+                Forms\Components\Textarea::make('description_ar')
+                    ->label('Description (AR)')
+                    ->rows(3)
+                    ->columnSpanFull(),
                 TextInput::make('price')->label('Price')->numeric()->required()->step('0.001')->minValue(0),
                 TextInput::make('price_two')->label('Price Two')->numeric()->step('0.001')->minValue(0)->placeholder('Optional - Leave empty if single price'),
                 TextInput::make('price_three')->label('Price Three')->numeric()->step('0.001')->minValue(0)->placeholder('Optional - Leave empty if single price'),
@@ -75,6 +83,16 @@ class ProductResource extends Resource
                 TextColumn::make('subcategory.label_en')->label('Subcategory')->toggleable(isToggledHiddenByDefault: true)->sortable()->searchable(),
                 TextColumn::make('name_en')->label('Name EN')->sortable()->searchable(),
                 TextColumn::make('name_ar')->label('Name AR')->toggleable(isToggledHiddenByDefault: true)->sortable()->searchable(),
+                TextColumn::make('description_en')->label('Description EN')->toggleable(isToggledHiddenByDefault: true)->limit(50)->tooltip(function (TextColumn $column): ?string {
+                    $state = $column->getState();
+                    if (strlen($state) <= 50) return null;
+                    return $state;
+                }),
+                TextColumn::make('description_ar')->label('Description AR')->toggleable(isToggledHiddenByDefault: true)->limit(50)->tooltip(function (TextColumn $column): ?string {
+                    $state = $column->getState();
+                    if (strlen($state) <= 50) return null;
+                    return $state;
+                }),
                 TextColumn::make('price')->label('Price')->money('BHD', divideBy: 1)->formatStateUsing(function ($state, $record) {
                     $prices = [$state];
                     if ($record->price_two) $prices[] = $record->price_two;
