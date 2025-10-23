@@ -177,17 +177,16 @@
         <div class="modal-image-container">
           <img id="modal-product-image" src="" alt="" class="modal-product-image">
         </div>
+        <div class="modal-description" id="modal-description" style="display: none;">
+          <p id="modal-description-text" data-en="" data-ar=""></p>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Pass data to JavaScript -->
+  <!-- Data will be loaded from API /api/menu -->
   <script>
-    window.menuData = {
-      categories: @json($categories ?? []),
-      products: @json($products ?? []),
-      currentCategory: @json($currentCategory ?? null)
-    };
+    // Removed window.menuData - using API instead for fresh data with descriptions
   </script>
   
   <script src="{{ asset('js/script.js') }}"></script>

@@ -1,6 +1,6 @@
-const CACHE_NAME = 'sougha-pwa-v2';
-const STATIC_CACHE = 'sougha-static-v2';
-const IMAGES_CACHE = 'sougha-images-v2';
+const CACHE_NAME = 'sougha-pwa-v4';
+const STATIC_CACHE = 'sougha-static-v4';
+const IMAGES_CACHE = 'sougha-images-v4';
 
 const urlsToCache = [
   '/',
@@ -9,8 +9,8 @@ const urlsToCache = [
   '/images/logo icon-01.png',
   '/images/Sougha.png',
   '/images/1-04.png',
-  '/manifest.webmanifest',
-  '/api/menu'
+  '/manifest.webmanifest'
+  // Removed '/api/menu' - API should always be fresh, never pre-cached
 ];
 
 const imageExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'];
@@ -33,6 +33,12 @@ self.addEventListener('install', function(event) {
 self.addEventListener('fetch', function(event) {
   const request = event.request;
   const url = new URL(request.url);
+  
+  // Never cache admin pages and Filament assets - always fetch fresh from network
+  if (url.pathname.startsWith('/admin') || url.pathname.includes('/filament/')) {
+    event.respondWith(fetch(request));
+    return;
+  }
   
   // Handle images with cache-first strategy
   if (isImageRequest(url.pathname)) {

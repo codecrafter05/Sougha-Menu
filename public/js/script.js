@@ -28,6 +28,16 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.classList.toggle('active', isActive);
         btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
       });
+      // Update modal description if modal is open
+      const modal = document.getElementById('product-modal');
+      const modalDescriptionText = document.getElementById('modal-description-text');
+      if (modal && modal.classList.contains('active') && modalDescriptionText) {
+        const descEn = modalDescriptionText.getAttribute('data-en');
+        const descAr = modalDescriptionText.getAttribute('data-ar');
+        if (descEn || descAr) {
+          modalDescriptionText.textContent = (lang === 'ar' ? descAr : descEn) || descEn || descAr || '';
+        }
+      }
     }
   }
   setLanguage('en');
@@ -99,18 +109,34 @@ document.addEventListener('DOMContentLoaded', function() {
     if (product.subcategory) card.dataset.subcategory = product.subcategory;
     const frame = document.createElement('div');
     frame.className = 'image-frame';
-    const img = document.createElement('img');
-    img.src = product.image;
-    img.alt = product.name[currentLang];
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.width = 400; img.height = 280;
     
-    // Add click event to open modal
-    img.style.cursor = 'pointer';
-    img.addEventListener('click', () => openProductModal(product));
-    
-    frame.appendChild(img);
+    // Only create img if product has image
+    if (product.image) {
+      const img = document.createElement('img');
+      img.src = product.image;
+      img.alt = product.name[currentLang];
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.width = 400; img.height = 280;
+      
+      // Add click event to open modal
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', () => openProductModal(product));
+      
+      frame.appendChild(img);
+    } else {
+      // Add placeholder SVG if no image
+      const placeholder = document.createElement('div');
+      placeholder.className = 'product-placeholder';
+      placeholder.innerHTML = `
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21,15 16,10 5,21"/>
+        </svg>
+      `;
+      frame.appendChild(placeholder);
+    }
     const title = document.createElement('h3');
     title.textContent = product.name[currentLang];
     
@@ -335,12 +361,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Product Modal Functions
   function openProductModal(product) {
+    // Don't open modal if product has no image
+    if (!product.image) {
+      return;
+    }
+    
     const modal = document.getElementById('product-modal');
     const modalImage = document.getElementById('modal-product-image');
+    const modalDescription = document.getElementById('modal-description');
+    const modalDescriptionText = document.getElementById('modal-description-text');
     
     // Set modal content
     modalImage.src = product.image;
     modalImage.alt = product.name[currentLang];
+    
+    // Handle description
+    const hasDescription = product.description && (product.description.en || product.description.ar);
+    if (hasDescription) {
+      modalDescriptionText.setAttribute('data-en', product.description.en || '');
+      modalDescriptionText.setAttribute('data-ar', product.description.ar || '');
+      modalDescriptionText.textContent = product.description[currentLang] || product.description.en || product.description.ar || '';
+      modalDescription.style.display = 'block';
+    } else {
+      modalDescription.style.display = 'none';
+    }
     
     // Show modal
     modal.classList.add('active');

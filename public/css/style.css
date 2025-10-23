@@ -1047,6 +1047,19 @@ html {
   object-position: center;
 }
 
+.modal-description {
+  padding: 1.5rem;
+  background: var(--creme-light);
+  text-align: center;
+}
+
+.modal-description p {
+  color: #777;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
 /* Modal Responsive Design */
 @media (max-width: 768px) {
   .modal-content {
