@@ -45,7 +45,7 @@
         </span>
       </a>
 
-      <a class="link-card" href="https://orderbh.site/menu/sougha" target="_blank" rel="noopener">
+      <!-- <a class="link-card" href="https://orderbh.site/menu/sougha" target="_blank" rel="noopener">
         <span class="icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4c0-1.1.9-2 2-2Zm8 1.5V8h4.5L14 3.5ZM8 12.5h8v1.5H8v-1.5Zm0 4h8v1.5H8v-1.5Zm0-8h5V10H8V8.5Z"/></svg>
         </span>
@@ -53,7 +53,7 @@
           <strong>Bahrain, Menu Delivery</strong>
           <em>See Our Menu</em>
         </span>
-      </a>
+      </a> -->
 
       <!-- Contact 1 -->
       <a class="link-card" href="tel:+97300000000">
