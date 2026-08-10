@@ -444,6 +444,65 @@ html[dir="rtl"] .categories::after { content: '<'; }
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Promo banner */
+.promo-banner-wrap {
+  width: 100%;
+  max-width: 960px;
+  margin: 0.5rem auto 0.25rem;
+  padding: 0 0.75rem;
+}
+
+.promo-banner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 1;
+  max-height: 120px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(94, 70, 54, 0.08);
+  box-shadow: 0 4px 14px rgba(94, 70, 54, 0.12);
+}
+
+.promo-banner-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.promo-banner-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+.promo-banner-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.promo-banner-slide a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .promo-banner {
+    aspect-ratio: 3.2 / 1;
+    max-height: 88px;
+    border-radius: 12px;
+  }
+
+  .promo-banner-wrap {
+    margin-top: 0.35rem;
+    padding: 0 0.5rem;
+  }
+}
+
 /* Product Grid */
 .product-grid {
   padding: 2rem 0;

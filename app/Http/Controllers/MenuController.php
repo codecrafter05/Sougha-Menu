@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\PromoBanner;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 
@@ -63,9 +64,23 @@ class MenuController extends Controller
                 ];
             })->values()->all();
 
+        $promoBanners = PromoBanner::query()
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get()
+            ->map(function (PromoBanner $banner) {
+                return [
+                    'id' => $banner->id,
+                    'image' => Storage::url($banner->image_path),
+                    'link_url' => $banner->link_url ?? '',
+                ];
+            })->values()->all();
+
         return response()->json([
             'categories' => $categories,
             'products' => $products,
+            'promo_banners' => $promoBanners,
         ]);
     }
 }

@@ -123,6 +123,11 @@
           </div>
         </div>
       </div>
+
+      <section class="promo-banner-wrap" id="promo-banner-wrap" hidden aria-label="Promotions">
+        <div class="promo-banner" id="promo-banner"></div>
+      </section>
+
       <div class="product-grid" id="product-grid">
         @if(isset($products))
           @foreach($products as $product)

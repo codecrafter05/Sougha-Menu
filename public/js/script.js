@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const productGrid = document.getElementById('product-grid');
   let menuData = null;
   let hasNavigated = false;
+  let promoTimer = null;
+  let promoIndex = 0;
 
   // i18n/dir support + runtime switching
   let currentLang = 'en';
@@ -69,6 +71,58 @@ document.addEventListener('DOMContentLoaded', function() {
     
     return new Intl.NumberFormat(locale, options).format(numValue);
   };
+
+  function stopPromoCarousel() {
+    if (promoTimer) {
+      clearInterval(promoTimer);
+      promoTimer = null;
+    }
+  }
+
+  function showPromoSlide(index) {
+    const container = document.getElementById('promo-banner');
+    if (!container) return;
+    container.querySelectorAll('.promo-banner-slide').forEach((el, i) => {
+      el.classList.toggle('active', i === index);
+    });
+    promoIndex = index;
+  }
+
+  function startPromoCarousel() {
+    stopPromoCarousel();
+    const banners = (menuData && menuData.promo_banners) || [];
+    if (banners.length <= 1) return;
+    promoTimer = setInterval(() => {
+      showPromoSlide((promoIndex + 1) % banners.length);
+    }, 5000);
+  }
+
+  function renderPromoBanner() {
+    const wrap = document.getElementById('promo-banner-wrap');
+    const container = document.getElementById('promo-banner');
+    if (!wrap || !container) return;
+
+    const banners = (menuData && menuData.promo_banners) || [];
+    if (!banners.length) {
+      wrap.hidden = true;
+      container.innerHTML = '';
+      stopPromoCarousel();
+      return;
+    }
+
+    wrap.hidden = false;
+    container.innerHTML = banners.map((banner, index) => {
+      const active = index === 0 ? ' active' : '';
+      const img = `<img src="${banner.image}" alt="" loading="lazy" decoding="async">`;
+      const inner = banner.link_url
+        ? `<a href="${banner.link_url}" target="_blank" rel="noopener noreferrer">${img}</a>`
+        : img;
+      return `<div class="promo-banner-slide${active}" data-banner-index="${index}">${inner}</div>`;
+    }).join('');
+
+    promoIndex = 0;
+    startPromoCarousel();
+  }
 
   // Build categories
   function renderCategories(categories) {
@@ -294,6 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
       menuData = data;
       const categories = [{ slug: 'all', label: { en: 'All', ar: 'الكل' }, icon: 'images/allicon.png' }, ...data.categories];
       renderCategories(categories);
+      renderPromoBanner();
       setupRevealAnimations();
       setupFiltering();
       // wire language switch buttons
